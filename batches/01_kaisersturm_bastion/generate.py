@@ -760,7 +760,7 @@ def collision_suite(tag, coll):
             for k in range(1, nmax + 1):
                 e = sign * 0.5 * k
                 if sign > 0 and stop is not None and e > stop:
-                    why = "elevating gear stop (proposal)"
+                    why = "elevating gear stop"
                     break
                 gp.rotation_euler = (0, math.radians(-e), 0); upd()
                 hit = overlaps(gun_all, hull_all) + overlaps(gun_all, turret_body)

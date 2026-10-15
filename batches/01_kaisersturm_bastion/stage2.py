@@ -596,7 +596,7 @@ def detail_bastion(coll, root):
 
 # ================================================================== Stage 2 revision 1 (review 15 Oct 2026)
 # Smoke and gas grenade dischargers, headlights and tail lights, track pins and end connectors,
-# and a defined elevating-gear stop. Every value is in the stage2 block of params.json.
+# and a defined elevating-gear stop. Every value is in the stage2 block of params.json (approved 15 Oct 2026).
 from mathutils.bvhtree import BVHTree as _BVH
 
 def bm_lathe_dir(bm, profile, seg, origin, axis, slot=None):
@@ -755,5 +755,5 @@ def revision1_details(tag, coll, root, V, D):
         tail_light(tag, coll, root, xr + TL["x_from_rear"], s * TL["y"], zdeck, side)
     track_link_detail(tag, V["running_gear"])
     gp["elevation_stop_deg"] = D["elevation_stop_deg"]
-    gp["note"] = (f"Elevation axis (trunnion) - rotate about local Y. Elevating gear stop +{D['elevation_stop_deg']} deg (proposal); "
+    gp["note"] = (f"Elevation axis (trunnion) - rotate about local Y. Elevating gear stop +{D['elevation_stop_deg']} deg; "
                   "depression is limited physically (see stage2_report.json)")

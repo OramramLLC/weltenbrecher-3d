@@ -4,7 +4,9 @@
 
 **Revision 1 (15 Oct 2026, after Nate's review):** Bastion .50 moved forward beside the cupola; smoke and gas dischargers, headlights and tail lights, track pins and end connectors, and an elevating-gear stop added to both tanks. See "Revision 1" below. 
 
-**Revision 2 (15 Oct 2026):** Nate allowed hatches to open further. Hull hatch lids now open to 155° (Kaisersturm) and 165° (Bastion), and the Bastion cupola lid to 155°. See "Revision 2" below. Stage 2 is awaiting review again.
+**Revision 2 (15 Oct 2026):** Nate allowed hatches to open further. Hull hatch lids now open to 155° (Kaisersturm) and 165° (Bastion), and the Bastion cupola lid to 155°. See "Revision 2" below.
+
+**Review complete (15 Oct 2026):** every Stage 2 choice is approved and nothing is left as a proposal. Stage 3 starts when Nate says so.
 
 Production-design concepts only. Clearance checks show the parts don't collide as modeled. They say nothing about armour, mass, ballistics or whether a real crew could work the vehicle.
 
@@ -84,7 +86,7 @@ The Bastion's core length is 4.7 cm over its 10.00 m figure because the rear-doo
 | 135° | −7.5° | +18° | −15.0° (barrel over hull) | +20° |
 | 180° (rear) | −7.0° (engine deck) | +18° | −6.0° (exhaust cowl) | +20° |
 
-Revision 1 added the elevating-gear stops (proposals). Before that, nothing on the exterior stopped the Kaisersturm's gun before the 30° end of the scan, and the Bastion's mantlet met its port at +24.5°. Depression limits are unchanged: none of the new parts is in the gun's path.
+Revision 1 added the elevating-gear stops (approved 15 Oct 2026). Before that, nothing on the exterior stopped the Kaisersturm's gun before the 30° end of the scan, and the Bastion's mantlet met its port at +24.5°. Depression limits are unchanged: none of the new parts is in the gun's path.
 
 **Hatches open:**
 - No lid, door or hatch fouls any fixed part when open, and the turret lids clear the .50 mount, aerials and cupola.
@@ -150,21 +152,24 @@ Side effect: open at 165°, the Bastion's hull lids reach 2.30 m from the centre
 
 - Nate liked most of the first checkpoint and flagged only the .50. Treated as approved: Kaisersturm bow MG and driver's visor; spare links and plate tow eyes; Bastion crew-air layout; hinge sides; vision-block counts, grille styles and tool layouts; and the three forced changes to Stage 1 geometry (trunnions, Bastion hull hatches, turret undercut).
 - Changed: Bastion .50 moved forward to the cupola (Revision 1).
+- `params.json` brought in line with the README's tagging convention: RETAINED / DERIVED status kept; Claude's choices would carry `"proposal": true` until approved. Since everything is now approved, no tags remain.
 - Asked for before Stage 3: the "not modeled yet" items, with smoke **and gas** dischargers (Revision 1).
-- Not flagged, left as modeled pending confirmation: Kaisersturm −7.5° depression, Bastion −3.5° at 45°, Bastion 10.05 m core length.
+- Accepted as modeled: Kaisersturm −7.5° depression all round, Bastion −3.5° depression at 45° (barrel over the closed driver's-lid periscope), and Bastion 10.05 m core length (rear-door hinges 4.7 cm proud of the rear plate).
 - Revision 1 follow-up: Nate confirmed gas grenade launchers are what he meant. He allowed hatches to open further where that clears parts (Revision 2).
+- Approved (Revision 1): every Revision 1 proposal. That covers the discharger layouts, cup counts and firing angles, and the banded gas cup. It also covers the +18° / +20° elevating-gear stops, the headlight and guard styles, the track-pin designs, and the .50's position (x +0.15, y −0.25) with the 0.70 m reach rule.
 - Approved (Revision 2): hull hatch lids opening to 155° (Kaisersturm) and 165° (Bastion), and the Bastion cupola lid to 155°. The Bastion's open hull lids overhanging the tracks by about 0.48 m is accepted. Kaisersturm crew drill: lay the gun at about +3° before traversing with hull hatches open.
 
-## Stage 2 proposals (editable, not canon)
+## Stage 2 choices (approved 15 Oct 2026)
 
-Everything in the `stage2` block of `params.json`. The ones most likely to matter:
+Everything in the `stage2` block of `params.json` started as a proposal; all of it is now approved. The ones most likely to matter:
 - **Kaisersturm bow MG and driver's visor.** Not in the brief, which only fixes the Bastion's bow gun. Added because a German heavy of this lineage plausibly carries both.
 - **Kaisersturm spare links on the nose** and the heavy plate tow eyes.
 - **Bastion crew-air layout:** filter/blower box and intake on the deck front-right, ventilator on the turret roof.
-- **Bastion .50 on the turret roof centre-line** rather than on the cupola.
+- **Bastion .50 on a roof pintle** rather than on the cupola. Moved forward beside the cupola in Revision 1.
 - Hinge sides: hull hatches outboard on both; Kaisersturm cupola hinged rear, Bastion cupola outboard right; loader's hatches outboard.
 - Cupola vision-block counts (7 / 6), louvre and grille styles, and tool layouts.
-- **Revision 1 proposals:** discharger layouts, cup counts and firing angles; using a banded cup for gas; elevating-gear stops of +18° / +20°; headlight and guard styles; track-pin styles. The .50 position is the change Nate asked for. Its exact spot (x +0.15, y −0.25) and the 0.70 m reach rule are proposals.
+- **Revision 1:** discharger layouts, cup counts and firing angles; the banded gas cup; elevating-gear stops of +18° / +20°; headlight and guard styles; track-pin styles; the .50's spot (x +0.15, y −0.25) and the 0.70 m reach rule.
+- **Revision 2:** hatch opening angles and the Kaisersturm's +3° traverse drill.
 
 ## Not modeled yet
 

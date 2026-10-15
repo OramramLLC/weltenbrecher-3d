@@ -154,35 +154,35 @@
           "max_depression_deg": -7.5,
           "depression_limited_by": "Breech_Clearance x Turret",
           "max_elevation_deg": 18.0,
-          "elevation_limited_by": "elevating gear stop (proposal)"
+          "elevation_limited_by": "elevating gear stop"
         },
         {
           "traverse_deg": 45,
           "max_depression_deg": -7.5,
           "depression_limited_by": "Breech_Clearance x Turret",
           "max_elevation_deg": 18.0,
-          "elevation_limited_by": "elevating gear stop (proposal)"
+          "elevation_limited_by": "elevating gear stop"
         },
         {
           "traverse_deg": 90,
           "max_depression_deg": -7.5,
           "depression_limited_by": "Breech_Clearance x Turret",
           "max_elevation_deg": 18.0,
-          "elevation_limited_by": "elevating gear stop (proposal)"
+          "elevation_limited_by": "elevating gear stop"
         },
         {
           "traverse_deg": 135,
           "max_depression_deg": -7.5,
           "depression_limited_by": "Breech_Clearance x Turret",
           "max_elevation_deg": 18.0,
-          "elevation_limited_by": "elevating gear stop (proposal)"
+          "elevation_limited_by": "elevating gear stop"
         },
         {
           "traverse_deg": 180,
           "max_depression_deg": -7.0,
           "depression_limited_by": "Barrel x EngineAccessPanel; Barrel x Hull",
           "max_elevation_deg": 18.0,
-          "elevation_limited_by": "elevating gear stop (proposal)"
+          "elevation_limited_by": "elevating gear stop"
         }
       ],
       "hatches": {
@@ -270,35 +270,35 @@
           "max_depression_deg": -16.0,
           "depression_limited_by": "Mantlet x Turret",
           "max_elevation_deg": 20.0,
-          "elevation_limited_by": "elevating gear stop (proposal)"
+          "elevation_limited_by": "elevating gear stop"
         },
         {
           "traverse_deg": 45,
           "max_depression_deg": -3.5,
           "depression_limited_by": "Barrel x HatchLid_driver",
           "max_elevation_deg": 20.0,
-          "elevation_limited_by": "elevating gear stop (proposal)"
+          "elevation_limited_by": "elevating gear stop"
         },
         {
           "traverse_deg": 90,
           "max_depression_deg": -16.0,
           "depression_limited_by": "Mantlet x Turret",
           "max_elevation_deg": 20.0,
-          "elevation_limited_by": "elevating gear stop (proposal)"
+          "elevation_limited_by": "elevating gear stop"
         },
         {
           "traverse_deg": 135,
           "max_depression_deg": -15.0,
           "depression_limited_by": "Barrel x Hull",
           "max_elevation_deg": 20.0,
-          "elevation_limited_by": "elevating gear stop (proposal)"
+          "elevation_limited_by": "elevating gear stop"
         },
         {
           "traverse_deg": 180,
           "max_depression_deg": -6.0,
           "depression_limited_by": "Barrel x ExhaustCowl",
           "max_elevation_deg": 20.0,
-          "elevation_limited_by": "elevating gear stop (proposal)"
+          "elevation_limited_by": "elevating gear stop"
         }
       ],
       "hatches": {
