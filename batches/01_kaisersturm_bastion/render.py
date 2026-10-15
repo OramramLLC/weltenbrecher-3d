@@ -273,3 +273,49 @@ for tag, t in TANKS.items():
 sheet4 = pad(stack(rows, gap=24), top=20, left=20, right=20, bottom=20)
 sheet4.save(os.path.join(REN, "sheet_D_stage2_detail.png"))
 print("detail done")
+
+# ------------------------------------------------------------------ Stage 2 revision 1 sheet
+# .50 operated from the cupola (figure standing in the hatch), dischargers and lights, track pins.
+RC = PRM["stage2"]["bastion_m12a2"]["roof_mg_reach_check"]
+CL = REP["clearances"]
+rev = {}
+EP = 0.03
+bs_open, _ = load_glb(os.path.join(OUT, TANKS["M12A2"]["glb_open"]))
+bs_closed, _ = load_glb(os.path.join(OUT, TANKS["M12A2"]["glb"]))
+ks_closed, _ = load_glb(os.path.join(OUT, TANKS["KS_B"]["glb"]))
+B_ = PRM["bastion_m12a2"]; zr_b = B_["hull"]["roof_z"]
+cup = B_["cupola"]; lid_top = B_["envelope"]["cupola_height"]["value"] - 0.06
+feet_z = lid_top + RC["shoulder_above_hatch_top_m"] - 1.45          # figure's shoulders sit ~1.45 m above its feet
+cdr, _ = load_glb(FIG, offset=(B_["turret"]["ring_centre_x"] + cup["rel_x"], cup["rel_y"], feet_z))
+d = np.array([-1.0, -1.25, 0.9]); d /= np.linalg.norm(d); tgt = np.array([-0.15, -0.3, 3.0])
+rev["mg"] = with_edges(*render(bs_open + cdr, look_at(tgt + d * 60, tgt), 4.0, 3.0, ppm=240,
+                               light_dirs=[((-0.6, -1.0, 1.2), 3.2), ((1.0, 0.5, 0.6), 1.0)]), depth_jump=EP)
+tgt = np.array([-0.3, 0, 0])
+rev["mg_top"] = with_edges(*render(bs_open + cdr, look_at((tgt[0], 0, 60), tgt, up=(0, 1, 0)), 4.2, 3.2, ppm=228,
+                                   light_dirs=[((-0.4, 0.5, 1.0), 3.0), ((0.5, -0.5, 0.6), 0.9)]), depth_jump=EP)
+for tag, items_, tgt_ in (("KS_B", ks_closed, (2.0, 0, 1.8)), ("M12A2", bs_closed, (1.8, 0, 1.8))):
+    d = np.array([1.0, -1.15, 0.65]); d /= np.linalg.norm(d); tgt = np.array(tgt_)
+    rev[(tag, "front")] = with_edges(*render(items_, look_at(tgt + d * 60, tgt), 6.0, 4.0, ground=True, ppm=160,
+                                             light_dirs=[((0.4, -1.0, 1.2), 3.2), ((1.0, 0.6, 0.5), 1.0)]), depth_jump=EP)
+for tag, items_ in (("KS_B", ks_closed), ("M12A2", bs_closed)):
+    RG = PRM[TANKS[tag]["key"]]["running_gear"]
+    d = np.array([1.0, -0.55, 0.3]); d /= np.linalg.norm(d)
+    tgt = np.array([RG["idler"]["x"] - 0.1, -RG["track_centre_y"], 0.5])
+    rev[(tag, "track")] = with_edges(*render(items_, look_at(tgt + d * 60, tgt), 2.4, 1.6, ground=True, ppm=400,
+                                             light_dirs=[((0.4, -1.0, 1.0), 3.2), ((1.0, 0.3, 0.3), 1.0)]), depth_jump=0.02)
+for k, (img, mask) in rev.items():
+    img.save(os.path.join(REN, ("rev1_" + ("_".join(k) if isinstance(k, tuple) else k)) + ".png"))
+mg = CL["M12A2"]["roof_mg50"]; rc = mg["reach_from_hatches"]["Cupola"]["shoulder_to_grips_m"]
+rows = [stack([label(rev["mg"][0], "M12A2 BASTION  —  .50 worked from the cupola (Rev. 1: moved forward)",
+                     f"1.80 m figure standing in the open cupola; shoulder to grips {rc:.2f} m (rule: within {RC['max_reach_m']} m)"),
+               label(rev["mg_top"][0], "M12A2 BASTION  —  turret roof, hatches open", "front to the right; pintle beside the cupola, clear of both lids")],
+              horizontal=True, gap=24),
+        stack([label(rev[("KS_B", "front")][0], "KAISERSTURM AUSF. B  —  dischargers and headlights",
+                     "smoke cups on the turret cheeks, gas cups (banded) on the sides; hooded headlights"),
+               label(rev[("M12A2", "front")][0], "M12A2 BASTION  —  dischargers and headlights",
+                     "common cup design, smoke forward bank, gas (banded) side bank; guarded lights")], horizontal=True, gap=24),
+        stack([label(rev[("KS_B", "track")][0], "KAISERSTURM AUSF. B  —  dry-pin track", "hinge knuckles and pin heads, 400 px = 1 m"),
+               label(rev[("M12A2", "track")][0], "M12A2 BASTION  —  double-pin track", "end connectors with wedge bolts, 400 px = 1 m")],
+              horizontal=True, gap=24)]
+pad(stack(rows, gap=24), top=20, left=20, right=20, bottom=20).save(os.path.join(REN, "sheet_E_stage2_rev1.png"))
+print("rev1 done")

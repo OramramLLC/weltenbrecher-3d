@@ -101,6 +101,7 @@ def round_hatch(tag, key, coll, parent, c, r_open, hinge_dir_deg, rim_h, rim_w, 
     ring_lathe(bm, 'Z', (cx, cy, cz), r_open, r_open + rim_w, -0.015, rim_h, 28)
     rim = finish2(f"{tag}_HatchRim_{key}", bm, coll, MAT["detail"], parent)
     rim["crew_clear_opening_m"] = round(2 * r_open, 3)
+    rim["hatch_top_centre"] = (cx, cy, cz + rim_h)
     hd = math.radians(hinge_dir_deg)
     d = r_open + rim_w * 0.5
     hpos = (cx + d * math.cos(hd), cy + d * math.sin(hd), cz + rim_h + lid_t / 2 + 0.003)
@@ -129,6 +130,7 @@ def rect_hatch(tag, key, coll, parent, c, L, W, hinge_side, rim_h, rim_w, lid_t,
         bm_box(bm, (cx + x0, cy + y0, cz - 0.015), (cx + x1, cy + y1, cz + rim_h))
     rim = finish2(f"{tag}_HatchRim_{key}", bm, coll, MAT["detail"], parent, weld=False)
     rim["crew_clear_opening_m"] = [round(L, 3), round(W, 3)]
+    rim["hatch_top_centre"] = (cx, cy, cz + rim_h)
     sgn = 1 if hinge_side == "+y" else -1
     d = hy + rim_w * 0.5
     hpos = (cx, cy + sgn * d, cz + rim_h + lid_t / 2 + 0.003)
@@ -160,6 +162,7 @@ def cupola(tag, coll, parent, cx, cy, z_roof, z_top, r, n_blocks, hinge_dir_deg,
     body = finish2(f"{tag}_Cupola", bm, coll, [MAT["detail"], MAT["vision"]], parent)
     body["vision_blocks"] = n_blocks
     body["crew_clear_opening_m"] = round(2 * r_in, 3)
+    body["hatch_top_centre"] = (cx, cy, z_top - lid_t)
     hd = math.radians(hinge_dir_deg); d = r - 0.03
     h = hinge_empty(f"{tag}_HatchHinge_cupola", coll, parent, (cx + d * math.cos(hd), cy + d * math.sin(hd), z_top - lid_t / 2),
                     hd + math.pi, open_deg)
@@ -426,6 +429,7 @@ def detail_kaisersturm(coll, root):
     le = lift_eye_mesh(tag)
     for i, (x, y) in enumerate(D["turret_lift_eyes"]):
         place(f"{tag}_LiftEye_T{i + 1}", le, coll, tp, (x, y, zt), yaw=math.atan2(y, x))
+    revision1_details(tag, coll, root, K, D)
 
 # ================================================================== BASTION detail
 def detail_bastion(coll, root):
@@ -564,20 +568,192 @@ def detail_bastion(coll, root):
     for i, (x, y) in enumerate(D["aerial_xy"]):
         aerial(tag, i + 1, coll, tp, (x, y, bz - 0.01))
 
-    # --- removable external .50 roof mount (pintle, cradle, gun) - kept clear of the commander's hatch
+    # --- removable external .50 roof mount, worked by the commander from the cupola.
+    #     Fixed pintle post on the roof; gun, cradle and ammunition box traverse on <TAG>_RoofMG50_Pivot.
+    #     (Rev. 1: moved forward from the rear roof so the grips sit beside the open cupola.)
     mx, my = D["roof_mg_xy"]
+    pz = roof_local + 0.40
     bm = bmesh.new()
     bm_lathe(bm, [(roof_local - 0.02, 0.0), (roof_local - 0.02, 0.09), (roof_local + 0.03, 0.09), (roof_local + 0.03, 0.04),
-                  (roof_local + 0.36, 0.035), (roof_local + 0.36, 0.0)], 14, 'Z', (mx, my, 0))
-    bm_box(bm, (mx - 0.10, my - 0.06, roof_local + 0.33), (mx + 0.10, my + 0.06, roof_local + 0.40))
+                  (roof_local + 0.33, 0.035), (roof_local + 0.33, 0.0)], 14, 'Z', (mx, my, 0))
     mount = finish2(f"{tag}_RoofMG50_Mount", bm, coll, MAT["detail"], tp, weld=False)
+    piv = empty(f"{tag}_RoofMG50_Pivot", coll, tp, loc=(mx, my, pz))
+    piv["note"] = "Pintle axis of the .50: rotate about local Z to traverse the gun"
     bm = bmesh.new()
-    gz0 = roof_local + 0.47
-    bm_box(bm, (mx - 0.62, my - 0.06, gz0 - 0.08), (mx + 0.18, my + 0.06, gz0 + 0.08))          # receiver
-    bm_box(bm, (mx - 0.75, my - 0.02, gz0 - 0.05), (mx - 0.62, my + 0.02, gz0 + 0.03))          # spade grips
-    bm_lathe(bm, [(mx + 0.18, 0.0), (mx + 0.18, 0.045), (mx + 0.48, 0.045), (mx + 0.48, 0.022), (mx + 1.08, 0.022), (mx + 1.08, 0.0)], 10, 'X', (0, my, gz0))
-    bm_box(bm, (mx - 0.32, my + 0.06, gz0 - 0.12), (mx - 0.08, my + 0.18, gz0 + 0.02))         # ammunition box
-    gun = finish2(f"{tag}_RoofMG50", bm, coll, MAT["detail"], mount, weld=False)
+    gz0 = 0.07
+    bm_box(bm, (-0.10, -0.06, -0.07), (0.10, 0.06, 0.0))                                   # cradle on the pintle
+    bm_box(bm, (-0.62, -0.06, gz0 - 0.08), (0.18, 0.06, gz0 + 0.08))                       # receiver
+    bm_box(bm, (-0.75, -0.02, gz0 - 0.05), (-0.62, 0.02, gz0 + 0.03))                      # spade grips
+    bm_lathe(bm, [(0.18, 0.0), (0.18, 0.045), (0.48, 0.045), (0.48, 0.022), (1.08, 0.022), (1.08, 0.0)], 10, 'X', (0, 0, gz0))
+    bm_box(bm, (-0.32, 0.06, gz0 - 0.12), (-0.08, 0.18, gz0 + 0.02))                       # ammunition box
+    gun = finish2(f"{tag}_RoofMG50", bm, coll, MAT["detail"], piv, weld=False)
+    gun["grip_local"] = (-0.685, 0.0, gz0 - 0.01)
+    gun["operator"] = D["roof_mg_operator"]
     for ob in (mount, gun):
         ob["envelope_exclude"] = "external .50 roof mount (brief: excluded from height envelope; removable)"
         ob["removable"] = True
+    revision1_details(tag, coll, root, B, D)
+
+# ================================================================== Stage 2 revision 1 (review 15 Oct 2026)
+# Smoke and gas grenade dischargers, headlights and tail lights, track pins and end connectors,
+# and a defined elevating-gear stop. Every value is in the stage2 block of params.json.
+from mathutils.bvhtree import BVHTree as _BVH
+
+def bm_lathe_dir(bm, profile, seg, origin, axis, slot=None):
+    """bm_lathe about an arbitrary axis through origin. profile: [(a, r)]; r == 0 collapses to the axis."""
+    a = unit(axis); ref = np.array([0, 0, 1.0]) if abs(a[2]) < 0.9 else np.array([1.0, 0, 0])
+    e1 = unit(np.cross(a, ref)); e2 = np.cross(a, e1); o = np.array(origin, float)
+    bm.faces.ensure_lookup_table(); n0 = len(bm.faces)
+    rings = []
+    for s_, r in profile:
+        if r <= 1e-9:
+            rings.append([bm.verts.new(tuple(o + a * s_))]); continue
+        rings.append([bm.verts.new(tuple(o + a * s_ + r * (math.cos(t) * e1 + math.sin(t) * e2)))
+                      for t in (2 * math.pi * k / seg for k in range(seg))])
+    for A, B_ in zip(rings[:-1], rings[1:]):
+        if len(A) == 1 and len(B_) == 1: continue
+        if len(A) == 1:
+            for k in range(seg): bm.faces.new((A[0], B_[k], B_[(k + 1) % seg]))
+        elif len(B_) == 1:
+            for k in range(seg): bm.faces.new((A[k], B_[0], A[(k + 1) % seg]))
+        else:
+            for k in range(seg): bm.faces.new((A[k], A[(k + 1) % seg], B_[(k + 1) % seg], B_[k]))
+    if slot is not None:
+        bm.faces.ensure_lookup_table()
+        for f in bm.faces[n0:]: f.material_index = slot
+
+def turret_surface(turret, az_deg, z):
+    """Outer turret surface at plan azimuth az (0 = forward, 90 = left) and height z, in turret-pivot space.
+    Returns the hit point and the horizontal outward normal."""
+    me = turret.data
+    bvh = _BVH.FromPolygons([v.co.copy() for v in me.vertices], [tuple(p.vertices) for p in me.polygons])
+    a = math.radians(az_deg); d = Vector((-math.cos(a), -math.sin(a), 0.0))
+    hit, nrm, _, _ = bvh.ray_cast(Vector((0, 0, z)) - d * 6.0, d, 12.0)
+    assert hit is not None, f"no turret surface at azimuth {az_deg}"
+    n = np.array([nrm.x, nrm.y, 0.0])
+    if np.dot(n, -np.array(d)) < 0: n = -n
+    return np.array(hit), unit(n)
+
+def discharger_bank(tag, name, coll, tp, turret, spec, side):
+    """A bank of grenade discharger cups on a bracket welded to the turret side.
+    Smoke and gas use the same cup; gas cups carry a raised band at the mouth so the crew can tell them apart."""
+    s = 1 if side == "L" else -1
+    p, n = turret_surface(turret, s * spec["mount_az_deg"], spec["mount_z"])
+    up = np.array([0, 0, 1.0]); t = unit(np.cross(up, n))
+    fa, fe = math.radians(spec["fire_az_deg"]), math.radians(spec["fire_el_deg"])
+    d = np.array([math.cos(fe) * math.cos(fa), s * math.cos(fe) * math.sin(fa), math.sin(fe)])
+    ro, ri, L, k = spec["tube_r"], spec["tube_r"] - 0.012, spec["tube_len"], spec["tubes"]
+    span = (k - 1) * spec["spacing"]
+    bm = bmesh.new()
+    tagged(bm, 0, bm_obox, p + n * 0.02, n, t, up, 0.02, span / 2 + ro + 0.04, 0.075)           # bracket plate
+    tagged(bm, 0, bm_obox, p + n * 0.06 - up * 0.05, n, t, up, 0.045, span / 2 + ro + 0.02, 0.012)  # shelf
+    mouths = []
+    for i in range(k):
+        b = p + n * (0.08 + ro * 0.6) + t * (i * spec["spacing"] - span / 2) - up * 0.03
+        tagged(bm, 0, bm_obox, (b + p + n * 0.04) / 2, unit(b - p - n * 0.04), t, up,
+               float(np.linalg.norm(b - p - n * 0.04)) / 2, 0.012, 0.03)                        # strut
+        bm_lathe_dir(bm, [(0.0, 0.0), (0.0, ro), (L, ro), (L, ri), (0.04, ri), (0.04, 0.0)], 14, b, d, slot=0)
+        bm_lathe_dir(bm, [(L - 0.004, 0.0), (L - 0.004, ri), (L - 0.002, ri), (L - 0.002, 0.0)], 14, b, d, slot=1)
+        if spec["kind"] == "gas":
+            bm_lathe_dir(bm, [(L - 0.065, ro - 0.002), (L - 0.065, ro + 0.014), (L - 0.03, ro + 0.014), (L - 0.03, ro - 0.002),
+                              (L - 0.065, ro - 0.002)], 14, b, d, slot=0)
+        mouths.append([float(v) for v in (b + d * L)])
+    ob = finish2(f"{tag}_Discharger_{name}_{side}", bm, coll, [MAT["detail"], MAT["recess"]], tp)
+    ob["discharger"] = spec["kind"]
+    ob["tube_mouths"] = mouths; ob["fire_dir"] = [float(v) for v in d]; ob["tube_bore_r"] = ri
+    ob["note"] = f"{k} x {spec['kind']} grenade discharger cups, fired electrically from inside the turret"
+    return ob
+
+def headlight(tag, name, coll, root, hull, spec, side, style):
+    """Headlight on the upper glacis with an armoured hood (KS) or a bar brush guard (Bastion)."""
+    s = 1 if side == "L" else -1
+    x0, z0, x1, z1 = hull["glacis_line"]
+    gx_at = lambda z: x0 + (z - z0) * (x1 - x0) / (z1 - z0)
+    zc, y = spec["z"], s * spec["y"]; r = spec["r"]
+    xb = gx_at(zc - r) + 0.015                                   # lamp back clears the sloped plate
+    lamps = [(zc, r)] + ([(zc - r - spec["blackout_r"] - 0.02, spec["blackout_r"])] if spec.get("blackout_r") else [])
+    bm = bmesh.new()
+    for zz, rr in lamps:
+        xg = gx_at(zz - rr) + 0.015
+        tagged(bm, 0, bm_box, (gx_at(zz) - 0.05, y - 0.035, zz - 0.035), (xg + 0.03, y + 0.035, zz + 0.035))     # bracket
+        tagged(bm, 0, bm_lathe, [(xg, 0.0), (xg, rr * 0.8), (xg + 0.04, rr), (xg + 0.13, rr), (xg + 0.13, 0.0)], 16, 'X', (0, y, zz))
+        tagged(bm, 1, bm_lathe, [(xg + 0.13, 0.0), (xg + 0.13, rr * 0.85), (xg + 0.136, rr * 0.85), (xg + 0.136, 0.0)], 16, 'X', (0, y, zz))
+    xf_ = xb + 0.13
+    if style == "hood":
+        tagged(bm, 0, bm_box, (xb - 0.02, y - r - 0.03, zc + r + 0.005), (xf_ + 0.05, y + r + 0.03, zc + r + 0.03))
+        for yy in (y - r - 0.03, y + r + 0.012):
+            tagged(bm, 0, bm_box, (xb, yy, zc - r * 0.3), (xf_ + 0.05, yy + 0.018, zc + r + 0.03))
+    else:
+        zb_ = lamps[-1][0] - lamps[-1][1] - 0.03; zt_ = zc + r + 0.04; xg = xf_ + 0.07
+        for yy in (y - r - 0.05, y + r + 0.05):
+            tagged(bm, 0, bm_box, (xg - 0.012, yy - 0.012, zb_), (xg + 0.012, yy + 0.012, zt_))
+            tagged(bm, 0, bm_box, (gx_at(zt_) - 0.06, yy - 0.012, zt_ - 0.024), (xg + 0.012, yy + 0.012, zt_))
+        tagged(bm, 0, bm_box, (xg - 0.012, y - r - 0.06, zt_ - 0.024), (xg + 0.012, y + r + 0.06, zt_))
+        tagged(bm, 0, bm_box, (xg - 0.012, y - 0.012, zb_), (xg + 0.012, y + 0.012, zt_))
+    ob = finish2(f"{tag}_Headlight_{name}_{side}", bm, coll, [MAT["detail"], MAT["vision"]], root, weld=False)
+    ob["note"] = "Driving headlight" + (" with blackout marker lamp" if spec.get("blackout_r") else "")
+
+def tail_light(tag, coll, root, x, y, z, side):
+    bm = bmesh.new()
+    tagged(bm, 0, bm_box, (x - 0.05, y - 0.07, z), (x + 0.05, y + 0.07, z + 0.10))
+    tagged(bm, 1, bm_box, (x - 0.056, y - 0.045, z + 0.03), (x - 0.05, y + 0.045, z + 0.075))
+    tagged(bm, 0, bm_box, (x - 0.09, y - 0.08, z + 0.10), (x + 0.05, y + 0.08, z + 0.12))     # rain/armour hood
+    ob = finish2(f"{tag}_TailLight_{side}", bm, coll, [MAT["detail"], MAT["vision"]], root, weld=False)
+    ob["note"] = "Tail and convoy light under a hood, on the rear deck inside the hull length"
+
+def track_link_detail(tag, R):
+    """Rebuild the shared track-link mesh with pins. Every link and spare link uses this mesh."""
+    me = bpy.data.meshes[f"{tag}_TrackLink"]
+    pitch, t = R["track_pitch"], R["track_thickness"]
+    w = P["kaisersturm_b" if tag == "KS_B" else "bastion_m12a2"]["envelope"]["track_width"]["value"]
+    TD = S2["kaisersturm_b" if tag == "KS_B" else "bastion_m12a2"]["track_detail"]
+    L = pitch * 0.46; hw = w / 2
+    bm = bmesh.new()
+    if TD["style"] == "dry_pin":
+        # plate between the joints; hinge lugs alternate across the width (even lugs at the +x joint,
+        # odd lugs at the -x joint) so neighbouring links interleave on one pin per joint
+        xm, kr, n = pitch / 2 - 0.045, TD["knuckle_r"], TD["lugs"]
+        bm_box(bm, (-xm, -hw, -t / 2), (xm, hw, t / 2))
+        bm_box(bm, (-0.025, -hw + 0.02, t / 2), (0.025, hw - 0.02, t / 2 + GROUSER))
+        bm_box(bm, (-L * 0.55, -0.03, -t / 2 - 0.09), (min(L * 0.55, xm), 0.03, -t / 2))
+        ws = w / n
+        for i in range(n):
+            y0, y1 = -hw + i * ws + 0.003, -hw + (i + 1) * ws - 0.003
+            e = 1 if i % 2 == 0 else -1
+            bm_box(bm, (min(e * xm, e * pitch / 2), y0, -kr), (max(e * xm, e * pitch / 2), y1, kr))
+            bm_lathe(bm, [(y0, 0.0), (y0, kr), (y1, kr), (y1, 0.0)], 8, 'Y', (e * pitch / 2, 0, 0))
+        for a0, a1 in ((-hw, -hw + 0.006), (hw - 0.006, hw)):
+            bm_lathe(bm, [(a0, 0.0), (a0, TD["pin_head_r"]), (a1, TD["pin_head_r"]), (a1, 0.0)], 8, 'Y', (pitch / 2, 0, 0))
+    else:   # double pin, rubber-bushed, joined by end connectors with wedge bolts at both edges
+        ce = TD["connector_w"]; hs = hw - ce - 0.005
+        bm_box(bm, (-L, -hs, -t / 2), (L, hs, t / 2))
+        bm_box(bm, (-0.025, -hs + 0.02, t / 2), (0.025, hs - 0.02, t / 2 + GROUSER))
+        bm_box(bm, (-L * 0.55, -0.03, -t / 2 - 0.09), (L * 0.55, 0.03, -t / 2))
+        xp = TD["pin_x"]; ch = TD["connector_h"]
+        for sx in (-1, 1):
+            for a0, a1 in ((-hw + 0.004, -hs), (hs, hw - 0.004)):
+                bm_lathe(bm, [(a0, 0.0), (a0, TD["pin_r"]), (a1, TD["pin_r"]), (a1, 0.0)], 8, 'Y', (sx * xp, 0, 0))
+        for a0, a1 in ((-hw, -hw + ce), (hw - ce, hw)):
+            bm_box(bm, (xp - 0.03, a0, -ch / 2), (pitch - xp + 0.03, a1, ch / 2))
+            bm_lathe(bm, [(ch / 2 - 0.002, 0.0), (ch / 2 - 0.002, 0.016), (ch / 2 + 0.016, 0.016), (ch / 2 + 0.016, 0.0)], 6, 'Z',
+                     (pitch / 2, (a0 + a1) / 2, 0))
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    bm.to_mesh(me); bm.free()
+    for p in me.polygons: p.use_smooth = False
+
+def revision1_details(tag, coll, root, V, D):
+    tp = bpy.data.objects[f"{tag}_Turret_Pivot"]; gp = bpy.data.objects[f"{tag}_Gun_Pivot"]
+    turret = bpy.data.objects[f"{tag}_Turret"]; hull = bpy.data.objects[f"{tag}_Hull"]
+    for name, spec in D["dischargers"].items():
+        for side in ("L", "R"):
+            discharger_bank(tag, name, coll, tp, turret, spec, side)
+    for side in ("L", "R"):
+        headlight(tag, "F", coll, root, hull, D["headlights"], side, D["headlights"]["style"])
+    TL = D["tail_lights"]; xr = -V["envelope"]["hull_length"]["value"] / 2
+    zdeck = V["hull"].get("engine_deck_z", V["hull"]["roof_z"])
+    for side, s in (("L", 1), ("R", -1)):
+        tail_light(tag, coll, root, xr + TL["x_from_rear"], s * TL["y"], zdeck, side)
+    track_link_detail(tag, V["running_gear"])
+    gp["elevation_stop_deg"] = D["elevation_stop_deg"]
+    gp["note"] = (f"Elevation axis (trunnion) - rotate about local Y. Elevating gear stop +{D['elevation_stop_deg']} deg (proposal); "
+                  "depression is limited physically (see stage2_report.json)")

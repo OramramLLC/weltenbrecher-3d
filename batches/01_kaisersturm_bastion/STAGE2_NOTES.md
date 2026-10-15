@@ -2,6 +2,8 @@
 
 15 October 2026. Builds on the approved Stage 1 blockout (lowered Kaisersturm skirts, rounded Bastion nose). Still flat gray: materials, wear and markings are Stage 3.
 
+**Revision 1 (15 Oct 2026, after Nate's review):** Bastion .50 moved forward beside the cupola; smoke and gas dischargers, headlights and tail lights, track pins and end connectors, and an elevating-gear stop added to both tanks. See "Revision 1" below. Stage 2 is awaiting review again.
+
 Production-design concepts only. Clearance checks show the parts don't collide as modeled. They say nothing about armour, mass, ballistics or whether a real crew could work the vehicle.
 
 ## Files
@@ -12,7 +14,7 @@ Production-design concepts only. Clearance checks show the parts don't collide a
 | `KS_B_stage2.glb`, `M12A2_stage2.glb` | One GLB per tank, everything closed |
 | `KS_B_stage2_hatches_open.glb`, `M12A2_stage2_hatches_open.glb` | Same models posed with every hatch, lid and door open, for review |
 | `generate.py`, `stage2.py`, `params.json` | Reproducible build: `stage2.py` adds the detail; every Stage 2 choice is in the `stage2` block of `params.json` |
-| `render.py`, `renders/` | Review sheets A–D, made from the exported GLBs |
+| `render.py`, `renders/` | Review sheets A–E, made from the exported GLBs. Sheet E and the `rev1_*` images cover Revision 1 |
 | `stage2_report.json` | All measurements and clearance results |
 
 ## How the moving parts work
@@ -21,6 +23,8 @@ Production-design concepts only. Clearance checks show the parts don't collide a
 - **Hatches, lids, cupola lids:** `<TAG>_HatchHinge_<name>` empties sit on each hinge line. Open by rotating about local Y by −`open_deg` (95° hull hatches, 100° turret hatches, stored on the empty).
 - **Bastion rear doors:** `M12A2_RearDoorHinge_L/R`, rotate about Z by `open_sign × open_deg` (100°). They swing outward from their outer edges.
 - Every hinge carries a note property saying how it opens. The open-pose GLBs show the result.
+- **Bastion .50:** `M12A2_RoofMG50_Pivot` sits on the pintle axis (rotate about Z to traverse the gun). The post is fixed to the roof.
+- **Elevation stop:** each `<TAG>_Gun_Pivot` carries `elevation_stop_deg` (+18° Kaisersturm, +20° Bastion). Depression is still limited by what the gun physically hits.
 
 ## What was added
 
@@ -45,7 +49,7 @@ Production-design concepts only. Clearance checks show the parts don't collide a
 - **Crew air, kept separate from engine cooling:** an armoured filter/blower box with a bolted service lid at the front-right of the engine deck, topped by a protected mushroom intake cowl, well forward of and away from the cooling grilles. A protected ventilator sits on the turret roof. These shapes show where the system lives; they don't claim effective protection.
 - Rear automotive doors hinged at the outer edges, opening 100°, with nothing stowed on them.
 - **Common-family fittings:** one tow-shackle design used at all four corners; lifting eyes on hull and turret; bolt heads on the deck panels and filter lid.
-- Removable external .50 roof mount (pintle, cradle, gun, ammunition box) on the turret roof centre-line behind the hatches. It's well clear of the commander's cupola and its lid.
+- Removable external .50 roof mount (pintle, cradle, gun, ammunition box). Moved forward in Revision 1; see below.
 - Pioneer tools on the left deck edge; stowage box on the right.
 
 ## Measured envelopes
@@ -56,7 +60,9 @@ Production-design concepts only. Clearance checks show the parts don't collide a
 | Gun-forward (hull rear plate to muzzle) | 10.60 | 10.00 |
 | Core envelope L × W × H | 10.60 × 4.00 × 3.20 | 10.05 × 3.65 × 3.15 |
 | Including tow fittings, aerials and the .50 | 10.89 × 4.00 × 4.04 | 10.20 × 3.65 × 5.00 |
-| Triangles (exported) | 47,080 | 50,838 |
+| Triangles (exported) | 117,468 (47,080 before Rev. 1) | 93,454 (50,838 before Rev. 1) |
+
+Revision 1 left every envelope figure unchanged. The triangle increase is almost all track pins: each tank uses one shared link mesh, so the GLBs grew only from 0.61 to 0.77 MB (Kaisersturm) and 0.74 to 0.93 MB (Bastion).
 
 The Bastion's core length is 4.7 cm over its 10.00 m figure because the rear-door hinges and handles stand proud of the rear plate. The gun-forward and hull measurements are unchanged. The "including" row is tall because of the whip aerials.
 
@@ -70,13 +76,13 @@ The Bastion's core length is 4.7 cm over its 10.00 m figure because the rear-doo
 
 | Traverse | Kaisersturm depression | Kaisersturm elevation | Bastion depression | Bastion elevation |
 |---|---|---|---|---|
-| 0° (front) | −7.5° (breech meets roof) | 30°+ | −16.0° (mantlet in port) | +24.5° (mantlet in port) |
-| 45° | −7.5° | 30°+ | **−3.5° (barrel over driver's lid periscope)** | +24.5° |
-| 90° (side) | −7.5° | 30°+ | −16.0° | +24.5° |
-| 135° | −7.5° | 30°+ | −15.0° (barrel over hull) | +24.5° |
-| 180° (rear) | −7.0° (engine deck) | 30°+ | −6.0° (exhaust cowl) | +24.5° |
+| 0° (front) | −7.5° (breech meets roof) | +18° (gear stop) | −16.0° (mantlet in port) | +20° (gear stop) |
+| 45° | −7.5° | +18° | **−3.5° (barrel over driver's lid periscope)** | +20° |
+| 90° (side) | −7.5° | +18° | −16.0° | +20° |
+| 135° | −7.5° | +18° | −15.0° (barrel over hull) | +20° |
+| 180° (rear) | −7.0° (engine deck) | +18° | −6.0° (exhaust cowl) | +20° |
 
-The Kaisersturm's 30°+ is the end of the scan, not a limit: nothing on the exterior stops it, and with no turret floor modeled the true elevation stop is undefined.
+Revision 1 added the elevating-gear stops (proposals). Before that, nothing on the exterior stopped the Kaisersturm's gun before the 30° end of the scan, and the Bastion's mantlet met its port at +24.5°. Depression limits are unchanged: none of the new parts is in the gun's path.
 
 **Hatches open:**
 - No lid, door or hatch fouls any fixed part when open, and the turret lids clear the .50 mount, aerials and cupola.
@@ -94,6 +100,41 @@ Each was forced by a clearance check. None changes the approved silhouette or an
 - Bastion hull hatches moved 21 cm outboard, still front-left and front-right, because the taller chemical-seal rims and lid periscopes hit the turret base.
 - The lowest 20 cm of the Bastion turret body is slightly more undercut, for the same reason.
 
+## Revision 1 (15 Oct 2026)
+
+Made after Nate's review of the first Stage 2 checkpoint. All values are in the `stage2` block of `params.json`.
+
+**Bastion .50 moved forward** (Nate: it didn't look easy to operate from the hatch). The pintle went from the rear roof centre-line (turret x −0.85, y 0) to beside the commander's cupola (x +0.15, y −0.25). Before, the grips were about 1.4 m from either hatch. Now:
+- **Reach:** with the commander standing in the open cupola, shoulder to grips is **0.44 m**. The rule is shoulders 0.40 m above the hatch top and grips within 0.70 m. The loader's hatch is 0.92 m away, so this is the commander's gun.
+- **Clearances:** the gun still clears the cupola, both lids, the periscopes, the ventilator and the main gun through its full elevation.
+- **Traverse on the pintle:** the full 360° is clear with hatches closed. With hatches open it fouls the loader's lid at about 75° and the cupola lid at 225–255°.
+- **Height:** the grips sit 3.34 m above the ground. The mount is still removable and still excluded from the height envelope.
+
+**Smoke and gas grenade dischargers**, prompted by the setting's routine chemical warfare. Both are fired electrically from inside the turret.
+- **Kaisersturm:** three smoke cups on each turret cheek, firing 30° outboard of forward. Two larger gas cups on each turret side, firing 70° outboard. All are elevated 45°.
+- **Bastion:** two banks of three per side using one common cup, in keeping with common-family parts. The smoke bank fires 35° outboard and the gas bank 75°, both at 45°.
+- **Telling them apart:** gas cups carry a raised band at the mouth so a crew can tell them from smoke by feel. Colour bands are Stage 3.
+- **Launch-path check:** the first 3 m of every cup's flight was ray-tested against the vehicle (centre plus four rays at 80 % bore). It was run with hatches closed and all open, turret at 45° steps. Clear on both tanks.
+
+**Headlights and tail lights.**
+- **Kaisersturm:** a hooded headlight at each upper-glacis corner.
+- **Bastion:** a headlight and a blackout marker lamp at each upper-glacis corner, inside a bar brush guard.
+- **Both:** hooded tail and convoy lights on the rear deck, kept inside the hull length. None of these changes any envelope or gun limit.
+
+**Track pins.** Each tank's one shared link mesh was rebuilt, so the spare links on the Kaisersturm's nose match.
+- **Kaisersturm (dry pin):** hinge lugs alternate across the width and interleave with the next link on a single pin, with pin heads at both edges.
+- **Bastion (double pin):** rubber-bushed, joined at both edges by end connectors with wedge bolts. The shoe body is 6 cm narrower each side to make room for the connectors, so the overall track width is still 0.82 m.
+- **Unchanged:** grouser tips still rest on the ground, track widths are unchanged, and every track, wheel and suspension clearance is still clean.
+
+**Elevation stop.** An elevating-gear stop of +18° (Kaisersturm) and +20° (Bastion), recorded on each gun pivot. A full turret interior (basket, seats, ammunition) is still not modeled; for an exterior model the stop is the part that matters.
+
+## Review decisions (15 Oct 2026)
+
+- Nate liked most of the first checkpoint and flagged only the .50. Treated as approved: Kaisersturm bow MG and driver's visor; spare links and plate tow eyes; Bastion crew-air layout; hinge sides; vision-block counts, grille styles and tool layouts; and the three forced changes to Stage 1 geometry (trunnions, Bastion hull hatches, turret undercut).
+- Changed: Bastion .50 moved forward to the cupola (Revision 1).
+- Asked for before Stage 3: the "not modeled yet" items, with smoke **and gas** dischargers (Revision 1).
+- Not flagged, left as modeled pending confirmation: Kaisersturm −7.5° depression, Bastion −3.5° at 45°, Bastion 10.05 m core length, and no traversing with hull hatches open.
+
 ## Stage 2 proposals (editable, not canon)
 
 Everything in the `stage2` block of `params.json`. The ones most likely to matter:
@@ -103,7 +144,8 @@ Everything in the `stage2` block of `params.json`. The ones most likely to matte
 - **Bastion .50 on the turret roof centre-line** rather than on the cupola.
 - Hinge sides: hull hatches outboard on both; Kaisersturm cupola hinged rear, Bastion cupola outboard right; loader's hatches outboard.
 - Cupola vision-block counts (7 / 6), louvre and grille styles, and tool layouts.
+- **Revision 1 proposals:** discharger layouts, cup counts and firing angles; using a banded cup for gas; elevating-gear stops of +18° / +20°; headlight and guard styles; track-pin styles. The .50 position is the change Nate asked for. Its exact spot (x +0.15, y −0.25) and the 0.70 m reach rule are proposals.
 
 ## Not modeled yet
 
-Turret interior beyond the hollow shell (no basket, floor or ammunition, so no internal elevation stop), track pins and end connectors, headlights, smoke dischargers, and markings and decals (Stage 3).
+Turret interior beyond the hollow shell (no basket, seats or ammunition; the elevation stop is defined as a gear limit instead), and markings and decals (Stage 3). Track pins, lights and dischargers were added in Revision 1.

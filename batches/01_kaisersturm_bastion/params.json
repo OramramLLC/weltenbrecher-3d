@@ -514,7 +514,49 @@
       "turret_wall": 0.12,
       "turret_roof_t": 0.06,
       "lid_periscope_scale": 0.9,
-      "lid_periscope_toward_hinge": 0.0
+      "lid_periscope_toward_hinge": 0.0,
+      "elevation_stop_deg": 18,
+      "dischargers": {
+        "Smoke": {
+          "kind": "smoke",
+          "mount_az_deg": 40,
+          "mount_z": 0.42,
+          "tubes": 3,
+          "spacing": 0.13,
+          "fire_az_deg": 30,
+          "fire_el_deg": 45,
+          "tube_r": 0.05,
+          "tube_len": 0.22
+        },
+        "Gas": {
+          "kind": "gas",
+          "mount_az_deg": 100,
+          "mount_z": 0.42,
+          "tubes": 2,
+          "spacing": 0.15,
+          "fire_az_deg": 70,
+          "fire_el_deg": 45,
+          "tube_r": 0.06,
+          "tube_len": 0.24
+        }
+      },
+      "headlights": {
+        "style": "hood",
+        "y": 1.55,
+        "z": 1.55,
+        "r": 0.085
+      },
+      "tail_lights": {
+        "x_from_rear": 0.22,
+        "y": 1.2
+      },
+      "track_detail": {
+        "style": "dry_pin",
+        "lugs": 6,
+        "knuckle_r": 0.042,
+        "pin_head_r": 0.028
+      },
+      "_rev1_notes": "Rev. 1 (review 15 Oct 2026): dischargers, headlights, tail lights, track pins and elevating-gear stop added. All PROPOSALS."
     },
     "bastion_m12a2": {
       "hull_hatch_open_deg": 95,
@@ -610,14 +652,63 @@
         ]
       ],
       "roof_mg_xy": [
-        -0.85,
-        0.0
+        0.15,
+        -0.25
       ],
       "_notes": "Crew air filter/blower box with armoured intake cowl sits at the front-right of the engine deck, separate from the cooling grilles.",
       "turret_wall": 0.1,
       "turret_roof_t": 0.06,
       "lid_periscope_scale": 0.75,
-      "lid_periscope_toward_hinge": 0.13
+      "lid_periscope_toward_hinge": 0.13,
+      "roof_mg_operator": "commander, standing in the cupola",
+      "roof_mg_reach_check": {
+        "shoulder_above_hatch_top_m": 0.4,
+        "max_reach_m": 0.7
+      },
+      "elevation_stop_deg": 20,
+      "dischargers": {
+        "Smoke": {
+          "kind": "smoke",
+          "mount_az_deg": 50,
+          "mount_z": 0.5,
+          "tubes": 3,
+          "spacing": 0.13,
+          "fire_az_deg": 35,
+          "fire_el_deg": 45,
+          "tube_r": 0.05,
+          "tube_len": 0.22
+        },
+        "Gas": {
+          "kind": "gas",
+          "mount_az_deg": 95,
+          "mount_z": 0.5,
+          "tubes": 3,
+          "spacing": 0.13,
+          "fire_az_deg": 75,
+          "fire_el_deg": 45,
+          "tube_r": 0.05,
+          "tube_len": 0.22
+        }
+      },
+      "headlights": {
+        "style": "guard",
+        "y": 1.45,
+        "z": 1.53,
+        "r": 0.08,
+        "blackout_r": 0.04
+      },
+      "tail_lights": {
+        "x_from_rear": 0.22,
+        "y": 1.25
+      },
+      "track_detail": {
+        "style": "double_pin",
+        "connector_w": 0.055,
+        "connector_h": 0.07,
+        "pin_x": 0.05,
+        "pin_r": 0.022
+      },
+      "_rev1_notes": "Rev. 1 (review 15 Oct 2026): .50 moved forward beside the cupola (was [-0.85, 0.0]); dischargers, headlights, tail lights, track pins and end connectors, elevating-gear stop added. All PROPOSALS except the .50 move, which Nate asked for."
     }
   }
 }

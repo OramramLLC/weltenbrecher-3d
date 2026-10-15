@@ -25,8 +25,8 @@
     "muzzle_x": 6.5,
     "hull_rear_x": -4.1,
     "ground_clearance_hull": 0.5,
-    "triangles_exported": 47080,
-    "objects_exported": 308,
+    "triangles_exported": 117468,
+    "objects_exported": 316,
     "excluded_from_envelope": [
       [
         "KS_B_Aerial_1",
@@ -89,8 +89,8 @@
     "muzzle_x": 6.25,
     "hull_rear_x": -3.75,
     "ground_clearance_hull": 0.47,
-    "triangles_exported": 50838,
-    "objects_exported": 295,
+    "triangles_exported": 93454,
+    "objects_exported": 304,
     "excluded_from_envelope": [
       [
         "M12A2_Aerial_1",
@@ -153,36 +153,36 @@
           "traverse_deg": 0,
           "max_depression_deg": -7.5,
           "depression_limited_by": "Breech_Clearance x Turret",
-          "max_elevation_deg": 30.0,
-          "elevation_limited_by": "scan limit"
+          "max_elevation_deg": 18.0,
+          "elevation_limited_by": "elevating gear stop (proposal)"
         },
         {
           "traverse_deg": 45,
           "max_depression_deg": -7.5,
           "depression_limited_by": "Breech_Clearance x Turret",
-          "max_elevation_deg": 30.0,
-          "elevation_limited_by": "scan limit"
+          "max_elevation_deg": 18.0,
+          "elevation_limited_by": "elevating gear stop (proposal)"
         },
         {
           "traverse_deg": 90,
           "max_depression_deg": -7.5,
           "depression_limited_by": "Breech_Clearance x Turret",
-          "max_elevation_deg": 30.0,
-          "elevation_limited_by": "scan limit"
+          "max_elevation_deg": 18.0,
+          "elevation_limited_by": "elevating gear stop (proposal)"
         },
         {
           "traverse_deg": 135,
           "max_depression_deg": -7.5,
           "depression_limited_by": "Breech_Clearance x Turret",
-          "max_elevation_deg": 30.0,
-          "elevation_limited_by": "scan limit"
+          "max_elevation_deg": 18.0,
+          "elevation_limited_by": "elevating gear stop (proposal)"
         },
         {
           "traverse_deg": 180,
           "max_depression_deg": -7.0,
           "depression_limited_by": "Barrel x EngineAccessPanel; Barrel x Hull",
-          "max_elevation_deg": 30.0,
-          "elevation_limited_by": "scan limit"
+          "max_elevation_deg": 18.0,
+          "elevation_limited_by": "elevating gear stop (proposal)"
         }
       ],
       "hatches": {
@@ -208,6 +208,48 @@
           "open_deg": 100,
           "fouls_parts_when_open": []
         }
+      },
+      "discharger_launch_paths": {
+        "Discharger_Smoke_L": {
+          "kind": "smoke",
+          "tubes": 3,
+          "fire_direction_turret_space": [
+            0.612,
+            0.354,
+            0.707
+          ],
+          "blocked": []
+        },
+        "Discharger_Smoke_R": {
+          "kind": "smoke",
+          "tubes": 3,
+          "fire_direction_turret_space": [
+            0.612,
+            -0.354,
+            0.707
+          ],
+          "blocked": []
+        },
+        "Discharger_Gas_L": {
+          "kind": "gas",
+          "tubes": 2,
+          "fire_direction_turret_space": [
+            0.242,
+            0.664,
+            0.707
+          ],
+          "blocked": []
+        },
+        "Discharger_Gas_R": {
+          "kind": "gas",
+          "tubes": 2,
+          "fire_direction_turret_space": [
+            0.242,
+            -0.664,
+            0.707
+          ],
+          "blocked": []
+        }
       }
     },
     "M12A2": {
@@ -225,36 +267,36 @@
           "traverse_deg": 0,
           "max_depression_deg": -16.0,
           "depression_limited_by": "Mantlet x Turret",
-          "max_elevation_deg": 24.5,
-          "elevation_limited_by": "Mantlet x Turret"
+          "max_elevation_deg": 20.0,
+          "elevation_limited_by": "elevating gear stop (proposal)"
         },
         {
           "traverse_deg": 45,
           "max_depression_deg": -3.5,
           "depression_limited_by": "Barrel x HatchLid_driver",
-          "max_elevation_deg": 24.5,
-          "elevation_limited_by": "Mantlet x Turret"
+          "max_elevation_deg": 20.0,
+          "elevation_limited_by": "elevating gear stop (proposal)"
         },
         {
           "traverse_deg": 90,
           "max_depression_deg": -16.0,
           "depression_limited_by": "Mantlet x Turret",
-          "max_elevation_deg": 24.5,
-          "elevation_limited_by": "Mantlet x Turret"
+          "max_elevation_deg": 20.0,
+          "elevation_limited_by": "elevating gear stop (proposal)"
         },
         {
           "traverse_deg": 135,
           "max_depression_deg": -15.0,
           "depression_limited_by": "Barrel x Hull",
-          "max_elevation_deg": 24.5,
-          "elevation_limited_by": "Mantlet x Turret"
+          "max_elevation_deg": 20.0,
+          "elevation_limited_by": "elevating gear stop (proposal)"
         },
         {
           "traverse_deg": 180,
           "max_depression_deg": -6.0,
           "depression_limited_by": "Barrel x ExhaustCowl",
-          "max_elevation_deg": 24.5,
-          "elevation_limited_by": "Mantlet x Turret"
+          "max_elevation_deg": 20.0,
+          "elevation_limited_by": "elevating gear stop (proposal)"
         }
       ],
       "hatches": {
@@ -291,6 +333,74 @@
         "M12A2_HatchHinge_loader": {
           "open_deg": 100,
           "fouls_parts_when_open": []
+        }
+      },
+      "discharger_launch_paths": {
+        "Discharger_Smoke_L": {
+          "kind": "smoke",
+          "tubes": 3,
+          "fire_direction_turret_space": [
+            0.579,
+            0.406,
+            0.707
+          ],
+          "blocked": []
+        },
+        "Discharger_Smoke_R": {
+          "kind": "smoke",
+          "tubes": 3,
+          "fire_direction_turret_space": [
+            0.579,
+            -0.406,
+            0.707
+          ],
+          "blocked": []
+        },
+        "Discharger_Gas_L": {
+          "kind": "gas",
+          "tubes": 3,
+          "fire_direction_turret_space": [
+            0.183,
+            0.683,
+            0.707
+          ],
+          "blocked": []
+        },
+        "Discharger_Gas_R": {
+          "kind": "gas",
+          "tubes": 3,
+          "fire_direction_turret_space": [
+            0.183,
+            -0.683,
+            0.707
+          ],
+          "blocked": []
+        }
+      },
+      "roof_mg50": {
+        "operator": "commander, standing in the cupola",
+        "pintle_xy_turret_space": [
+          0.15,
+          -0.25
+        ],
+        "grip_height_above_ground_m": 3.34,
+        "reach_rule": "shoulder 0.4 m above the hatch top, grips within 0.7 m",
+        "reach_from_hatches": {
+          "Cupola": {
+            "shoulder_to_grips_m": 0.44,
+            "within_reach": true
+          },
+          "loader": {
+            "shoulder_to_grips_m": 0.915,
+            "within_reach": false
+          }
+        },
+        "pintle_traverse_blocked_deg": {
+          "hatches_closed": [],
+          "hatches_open": [
+            "75..75 deg",
+            "225..255 deg"
+          ]
         }
       }
     }

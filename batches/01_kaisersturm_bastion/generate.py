@@ -749,6 +749,7 @@ def collision_suite(tag, coll):
         if h: sweep.append({"traverse_deg": deg, "pairs": h})
     res["traverse_sweep_closed_hatches"] = sweep
     lim = []
+    stop = gp.get("elevation_stop_deg")
     for deg in (0, 45, 90, 135, 180):
         tp.rotation_euler = (0, 0, math.radians(deg))
         out = {"traverse_deg": deg}
@@ -756,6 +757,9 @@ def collision_suite(tag, coll):
             best, why = 0.0, "scan limit"
             for k in range(1, nmax + 1):
                 e = sign * 0.5 * k
+                if sign > 0 and stop is not None and e > stop:
+                    why = "elevating gear stop (proposal)"
+                    break
                 gp.rotation_euler = (0, math.radians(-e), 0); upd()
                 hit = overlaps(gun_all, hull_all) + overlaps(gun_all, turret_body)
                 if sign < 0:
@@ -796,7 +800,76 @@ def collision_suite(tag, coll):
     res["hatches"] = hatch
     return res
 
+def set_all_hatches(coll, opened):
+    for h in [o for o in coll.all_objects if o.type == 'EMPTY' and "open_deg" in o]:
+        if opened: set_open(h)
+        else: h.rotation_euler = (0, 0, h.get("yaw0", h.rotation_euler.z))
+    bpy.context.view_layer.update()
+
+def discharger_paths(tag, coll, length=3.0):
+    """Ray-test the first 3 m of each grenade's flight (bore centre + 4 rays at 80 % bore radius) against the
+    vehicle, hatches closed and all open, turret at 45 deg steps. Whip aerials are ignored (they flex)."""
+    O = bpy.data.objects; tp = O[f"{tag}_Turret_Pivot"]
+    banks = [o for o in coll.all_objects if o.get("discharger")]
+    obst = [o for o in coll.all_objects if o.type == 'MESH' and not o.get("no_export") and not o.get("flexible")
+            and "TrackLink" not in o.name and not any(k in o.name for k in RUN_KEYS) and "Skirt" not in o.name]
+    out = {b.name.replace(tag + "_", ""): {"kind": b["discharger"], "tubes": len(b["tube_mouths"]),
+           "fire_direction_turret_space": [round(v, 3) for v in b["fire_dir"]], "blocked": []} for b in banks}
+    for opened in (False, True):
+        set_all_hatches(coll, opened)
+        for deg in range(0, 360, 45):
+            tp.rotation_euler = (0, 0, math.radians(deg)); bpy.context.view_layer.update()
+            trees = [(o, bvh_world(o)) for o in obst]
+            R3 = tp.matrix_world.to_3x3()
+            for b in banks:
+                d = (R3 @ Vector(b["fire_dir"])).normalized()
+                e1 = d.orthogonal().normalized(); e2 = d.cross(e1); rr = b["tube_bore_r"] * 0.8
+                hits = set()
+                for m in b["tube_mouths"]:
+                    c = tp.matrix_world @ Vector(m)
+                    for off in (Vector((0, 0, 0)), e1 * rr, -e1 * rr, e2 * rr, -e2 * rr):
+                        for o, tr in trees:
+                            if o != b and tr.ray_cast(c + off, d, length)[0] is not None:
+                                hits.add(o.name.replace(tag + "_", ""))
+                if hits:
+                    out[b.name.replace(tag + "_", "")]["blocked"].append(
+                        {"hatches": "open" if opened else "closed", "traverse_deg": deg, "by": sorted(hits)})
+    tp.rotation_euler = (0, 0, 0); set_all_hatches(coll, False)
+    return out
+
+def roof_mg_checks(tag, coll):
+    """Operator reach to the .50 grips from each turret hatch, and the pintle traverse arcs."""
+    O = bpy.data.objects; tp = O[f"{tag}_Turret_Pivot"]
+    piv, gun, mount = O[f"{tag}_RoofMG50_Pivot"], O[f"{tag}_RoofMG50"], O[f"{tag}_RoofMG50_Mount"]
+    RC = P["stage2"]["bastion_m12a2"]["roof_mg_reach_check"]
+    bpy.context.view_layer.update()
+    grip = piv.matrix_world @ Vector(gun["grip_local"])
+    reach = {}
+    for o in desc_meshes(tp):
+        if "hatch_top_centre" in o:
+            sh = tp.matrix_world @ (Vector(o["hatch_top_centre"]) + Vector((0, 0, RC["shoulder_above_hatch_top_m"])))
+            key = o.name.replace(tag + "_", "").replace("HatchRim_", "")
+            reach[key] = {"shoulder_to_grips_m": round((grip - sh).length, 3),
+                          "within_reach": (grip - sh).length <= RC["max_reach_m"]}
+    others = [o for o in desc_meshes(tp) if o not in (gun, mount) and not o.get("flexible")]
+    arcs_ = {}
+    for opened in (False, True):
+        set_all_hatches(coll, opened)
+        blocked = []
+        for deg in range(0, 360, 15):
+            piv.rotation_euler = (0, 0, math.radians(deg)); bpy.context.view_layer.update()
+            if overlaps([gun], others): blocked.append(deg)
+        arcs_["hatches_open" if opened else "hatches_closed"] = arcs(blocked)
+    piv.rotation_euler = (0, 0, 0); set_all_hatches(coll, False)
+    return {"operator": gun["operator"], "pintle_xy_turret_space": [round(v, 3) for v in piv.location[:2]],
+            "grip_height_above_ground_m": round(grip.z, 3),
+            "reach_rule": f"shoulder {RC['shoulder_above_hatch_top_m']} m above the hatch top, grips within {RC['max_reach_m']} m",
+            "reach_from_hatches": reach, "pintle_traverse_blocked_deg": arcs_}
+
 report["clearances"] = {"KS_B": collision_suite("KS_B", ks_coll), "M12A2": collision_suite("M12A2", bs_coll)}
+report["clearances"]["KS_B"]["discharger_launch_paths"] = discharger_paths("KS_B", ks_coll)
+report["clearances"]["M12A2"]["discharger_launch_paths"] = discharger_paths("M12A2", bs_coll)
+report["clearances"]["M12A2"]["roof_mg50"] = roof_mg_checks("M12A2", bs_coll)
 
 # ------------------------------------------------------------------ save + export
 for o in bpy.data.objects:
