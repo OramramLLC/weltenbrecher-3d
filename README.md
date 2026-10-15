@@ -65,7 +65,7 @@ Controlling canon is the *Weltenbrecher World and Story Bible v6.0*. Items marke
 
 1. Unpack the latest checkpoint zip into `batches/01_kaisersturm_bastion/`, with outputs into `out/` and sheets into `renders/`.
 2. Install dependencies: `pip install bpy numpy scipy trimesh pyrender pillow` (bpy is headless Blender, including Cycles). `render.py` also needs the system EGL/Mesa libraries (`libegl1 libegl-mesa0 libgl1-mesa-dri`) and DejaVu fonts.
-3. Run `generate.py`, then `render.py`, then `beauty.py`. Confirm the stage report passes before changing anything. From Stage 3 on, `generate.py` bakes the finish textures, which takes about 30–40 minutes on a 4-core cloud machine.
+3. Run `generate.py`, then `render.py`, then `beauty.py`. Confirm the stage report passes before changing anything. From Stage 3 on, `generate.py` bakes the finish textures, which takes about an hour on a 4-core cloud machine.
 4. Commit generated outputs only at review gates, alongside the checkpoint zip.
 
 ## Git notes

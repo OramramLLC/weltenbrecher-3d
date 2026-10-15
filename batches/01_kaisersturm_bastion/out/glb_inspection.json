@@ -1,8 +1,10 @@
 {
   "KS_B": {
-    "mesh_nodes": 322,
+    "mesh_nodes": 330,
     "track_links": 202,
     "road_wheels": 16,
+    "marking_meshes": 8,
+    "textured_meshes": 306,
     "glb_bounds_min": [
       -4.39,
       -2.0,
@@ -13,12 +15,14 @@
       2.0,
       4.04
     ],
-    "glb_triangles": 117468
+    "glb_triangles": 117736
   },
   "M12A2": {
-    "mesh_nodes": 300,
+    "mesh_nodes": 306,
     "track_links": 194,
     "road_wheels": 16,
+    "marking_meshes": 6,
+    "textured_meshes": 283,
     "glb_bounds_min": [
       -3.95,
       -1.825,
@@ -29,6 +33,6 @@
       1.825,
       4.995
     ],
-    "glb_triangles": 93454
+    "glb_triangles": 94196
   }
 }

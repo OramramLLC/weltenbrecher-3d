@@ -62,7 +62,24 @@ These are production-design concepts. A finished-looking render shows what the m
 
 ## Measured envelopes and checks
 
-MEASUREMENTS_PLACEHOLDER
+Stage 3 changed no geometry. Every figure matches Stage 2:
+
+| | Kaisersturm B | Bastion |
+|---|---|---|
+| Hull length | 8.20 | 7.50 |
+| Gun-forward (hull rear plate to muzzle) | 10.60 | 10.00 |
+| Core envelope L × W × H | 10.60 × 4.00 × 3.20 | 10.05 × 3.65 × 3.15 |
+| Triangles (Blender meshes) | 117,528 | 93,470 |
+| Triangles in the GLB, including text markings | 117,736 | 94,196 |
+| GLB size with embedded textures | 6.5 MB | 7.7 MB |
+
+Markings add 60 and 16 mesh triangles, plus the text converted at export. The decal meshes are excluded from the envelope because they stand 1.5 mm proud of the plate.
+
+Checks, all re-run:
+- **Clearance results** are identical to Stage 2: neutral pose, traverse, gun limits, hatches (with the +3° Kaisersturm drill), discharger launch paths, and the .50 reach and pintle traverse.
+- **Exported GLB bounds** are identical to Stage 2.
+- **Mirrored parts:** none of the 636 objects in the .blend has negative scale.
+- **Textures:** every tank mesh in the GLBs is textured (306 Kaisersturm, 283 Bastion). Markings and the optional decal keep plain materials.
 
 ## Stage 3 proposals (editable, not canon)
 
@@ -79,7 +96,7 @@ Everything in the `stage3` block of `params.json` tagged `"proposal": true`:
 - **Weld beads are not modeled as geometry.** They show in renders but won't come out in a print taken straight from the mesh. If the miniatures need raised beads, that's a separate geometry pass.
 - **Text uses Blender's default font.** A stencil font would be more correct. Any font can be swapped into the text objects in the `.blend` without rebuilding.
 - **Texture resolution:** 4096 px base colour and normal, 2048 px roughness/metallic, about 5 mm per texel. Close-ups tighter than the turret views in sheet F will start to soften.
-- **Bake time:** baking takes about 30–40 minutes of the `generate.py` run on this 4-core cloud machine.
+- **Run times on this 4-core cloud machine:** the bake takes about an hour of the `generate.py` run (each 4K map 13–18 minutes). `beauty.py` takes about 10 minutes for all eight shots.
 - **The beauty renders are previews:** 64 samples with denoising. For final renders, run `beauty.py` locally with more samples, e.g. `python3 beauty.py out/weltenbrecher_stage3_finish.blend renders 512`.
 
 ## Review gate
