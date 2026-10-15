@@ -1,0 +1,132 @@
+WELTENBRECHER — CLAUDE 3D MODELING HANDOFF v0.1
+15 October 2026
+
+TASK
+Create two editable exterior 3D concept models for the alternate-history drama Weltenbrecher:
+1. German Kaisersturm Ausf. B, the approximately 80-tonne breakthrough tank seen at Baku.
+2. American M12A2 Bastion, the 65-tonne working design assigned to Daniel Mercer at Livorno in 1946.
+
+This first pair compares design philosophies across generations. The Ausf. B is not the later D/E that the Bastion faces in Italy. Do not silently rename the B as a D/E. Establish the B's geometry first so later variants can be designed deliberately.
+
+These are production-design concepts, not engineering-certified vehicles. Use real geometry and dimensions rather than an image that merely looks like a 3D render.
+
+SOURCE AUTHORITY AND STATUS
+Retained project requirements: conventional tracked heavy tanks; one main turret and gun apiece; Kaisersturm B at Baku and later D/E by Livorno; German specialized breakthrough doctrine; American common-family maintainability; routine chemical warfare; Imperial Germany without a Nazi takeover.
+
+Existing working specifications, preserved for this model:
+- Kaisersturm B: approximately 82 tonnes (roughly 80–85 t target), hull 8.2 m, gun-forward overall envelope 10.6 m, width 4.0 m, cupola height 3.2 m, approximately 0.90 m tracks, 105 mm-class main gun, rear longitudinal V12 diesel.
+- Bastion M12A2: 65 t nominal, hull 7.5 m, gun-forward overall envelope approximately 10.0 m, width 3.65 m, turret roof 2.90 m, cupola 3.15 m, 0.82 m tracks, 4.70 m ground contact, eight road wheels in four external paired bogies per side, rear drive sprockets, 105 mm gun approximately L/55, rear V12 diesel, nominal 2.25 m turret ring.
+These are working design targets, not verified mass, armor, or internal packaging calculations.
+
+New art-direction proposals in this brief: exact wheel count for Kaisersturm, detailed turret contours, small fittings, paint shades and weathering placements. Keep those editable and list them as proposals in the accompanying notes. A credible-looking model does not validate the working specifications.
+
+If an older illustration conflicts with these numerical envelopes, follow the numbers. The corrected Kaisersturm measured-envelope sheet is a size reference, not a vehicle silhouette. The early oversized tank images are not geometry authorities. Ignore the early Bastion M12C image's 120 mm M58 label and rocket rack.
+
+SHARED VISUAL RULES
+These vehicles belong to a mid-century industrial world with a different development history. Show welded or cast steel, heavy mechanical joints, optical periscopes, conventional radio aerials, practical stowage and tools. Functional details should explain how crews operate and service the machine.
+
+Use a convincing hierarchy: hull and turret masses first; tracks, wheels, gun and mantlet second; hatches, grilles and tools third. Keep large armor surfaces readable. Avoid covering everything with tiny panels and bolts.
+
+No modern composite armor, reactive blocks, laser ranging boxes, thermal sight heads, digital screens, remote weapon stations, modern turbine exhausts or futuristic track systems. No ornamental smokestacks, extra main turrets or battleship superstructure.
+
+All crew hatches, handles and ladders must fit a person. Include a simple neutral 1.80 m scale figure for comparison. Neither tank is a building with tracks.
+
+KAISERSTURM AUSF. B — VISUAL IDENTITY
+One-sentence direction: a broad, heavily armored assault tank whose disciplined proportions make its mass believable.
+
+Silhouette:
+- Low, wide hull relative to its width; long, weight-bearing track footprint.
+- One substantial angular turret with clipped corners and a sloped rear. It must remain visibly capable of rotation, not resemble a fixed Jagdtiger-style casemate.
+- Broad turret face, heavy mantlet, long single 105 mm-class barrel. Keep the muzzle opening at the stated bore scale; do not turn it into a siege howitzer.
+- Distinct commander’s cupola with narrow vision blocks. Cupola height is included in the 3.2 m envelope; aerials are not.
+- Deep removable side skirts obscure much of the upper running gear. Reveal enough at the bottom and ends to show that the suspension is actually modeled.
+
+Construction:
+- Predominantly welded, faceted plate construction. Use substantial joints and restrained weld seams.
+- The frontal armor reads as thick through mantlet depth, plate edges and protected openings, without enormous cartoon bevels.
+- Broad rear engine deck with radiator grilles, removable service panels and plausible exhaust outlets. The diesel requires cooling machinery, not huge decorative pipes.
+- Heavy towing eyes, properly supported spare links, modest tool racks and two conventional radio-aerial bases where composition permits.
+
+Running-gear proposal:
+Use eight road-wheel stations per side, each with a double wheel, on individual torsion-bar arms. This wheel count is a new blockout proposal. Keep the wheels in one principal longitudinal row with no elaborate interleaving. Use a rear sprocket and front idler as a provisional layout; preserve those choices as parameters. Do not copy the Bastion's four two-wheel bogie modules. Make skirt panels removable as separate objects so the arrangement can be inspected.
+
+Finish proposal:
+Muted gray-green base paint, small black-and-white Imperial crosses, restrained tactical numbers. No swastikas or SS markings. Matte worn paint with dust on horizontal surfaces, polished track contact faces, scratches at access points and restrained exhaust soot. Allow a later Caucasus dust/mud finish without rebuilding geometry.
+
+Avoid:
+A Maus-sized hull; multiple stacked turrets; overlong hull to convey weight; house-sized hatches; an entire extra deck of armor; making every plate unnecessarily thick. Its established envelope is only moderately larger than the Bastion's.
+
+BASTION M12A2 — VISUAL IDENTITY
+One-sentence direction: a heavy American fighting vehicle whose accessible machinery makes fleet maintenance visible.
+
+Silhouette:
+- Broad conventional hull, clearly sloped upper glacis, relatively compact three-man turret with a broad rear bustle.
+- Single long 105 mm gun. The L/55 working designation is not permission to make 5.775 m of barrel project outside the mantlet; part of the gun assembly lies inside the turret.
+- 7.5 m hull and approximately 10.0 m total gun-forward length control the model. Do not stretch the hull to make the barrel or turret fit.
+- Turret roof at 2.90 m and cupola top at 3.15 m, excluding aerials and the external roof gun.
+- Four distinct external paired bogies per side, eight road wheels total per side, plus separately modeled sprocket and idler. Wide 0.82 m tracks. Ground contact approximately 4.70 m.
+- Rear engine and transmission; drive sprockets at the rear.
+
+Construction and service:
+A proposed form language is a welded hull with a rounded cast-looking turret shell and clearly defined rear bustle. This is art direction rather than an existing casting specification. Avoid making it a Sherman or Pershing copy with a new name.
+
+Show the common-family philosophy through replaceable bogie modules, accessible fasteners, rear automotive access doors, removable deck panels, lifting eyes and consistent tow fittings. Keep the rear doors clear of permanent stowage. Do not add a contemporary quick-release powerpack cassette.
+
+Crew access:
+Driver hatch front left; radio operator/bow gunner hatch front right; commander cupola turret right; loader hatch turret left. Use functional hatch hinges and a credible opening envelope. No large unprotected glass windows.
+
+Weapons and fittings:
+One .30-caliber coaxial gun, one .30-caliber bow gun, and a separately removable external .50-caliber roof mount. Keep the roof mount clear of the commander's hatch. No rocket rack on this M12A2. Barrel muzzle-brake geometry is an editable art proposal; omit a modern-looking bore evacuator unless separately approved.
+
+Chemical protection:
+Show substantial hatch rims, protected ventilation fittings and an accessible filter/blower service location. Separate the engine cooling grilles from the crew's protected air intake. Do not imply that an exterior vent shape proves effective chemical protection. Avoid elaborate modern NBC housings.
+
+Finish:
+Olive paint, restrained white national markings and unit stencils. An optional separate decal can read "Okie Gusher"; do not bake it into the base geometry. Keep text editable. Use rear-engine grime, grease near service points, fender abrasion, dusty seals and one subtly replaced panel. Avoid uniform orange rust or fantasy battle damage.
+
+THE COMPARISON MUST WORK IN GRAY
+Kaisersturm: broad faceted turret, deep skirts, substantial mantlet, visually enclosed running gear.
+Bastion: compact rounded/bustled turret, exposed paired bogies, clear service access.
+
+The B hull is only about 9% longer and 10% wider than the Bastion. Cupola heights are nearly equal: 3.20 versus 3.15 m. Do not manufacture a dramatic size difference that the dimensions do not support. At the same scale, armor distribution and shape must do the visual work.
+
+IMPLEMENTATION DEFAULT
+Prefer Blender with a reproducible Python generation script if that is available in your environment. Use metres; document the axes. Suggested convention: +X forward, +Y vehicle left, +Z up; origin at the hull's longitudinal and lateral center on the ground plane. Set actual mesh dimensions, not only scene-unit labels.
+
+Use named parameters for hull length, width, heights, track width, wheel count, contact length, turret placement and gun envelope. Record what each measurement includes. Aerials, roof weapons and loose accessories must not silently alter the core envelope.
+
+Keep hull, turret, gun, mantlet, hatches, track assemblies, bogies, skirts and optional markings as separate named objects or collections. Put turret rotation at its actual vertical axis and gun elevation at the trunnion axis. Check the neutral pose for collisions. Identify any remaining traverse/elevation collisions rather than clipping parts through each other.
+
+Model actual track thickness and visible tread faces. Repeated links may be instanced during editing; ensure the exported file includes them. Never use a smooth belt with painted links as the only close-view track geometry.
+
+Build only the exterior and coarse internal clearance placeholders needed to prevent obvious collisions. Do not spend the first pass on hidden engine internals, ammunition racks or a fully modeled crew compartment.
+
+Use reusable materials and efficient repeated parts. Choose a sensible polygon budget for the available runtime and report the final triangle count. Keep exported materials self-contained. Inspect the exported asset rather than assuming that a successful export preserved instances, transforms and materials.
+
+STAGED WORK TO CONTROL CREDIT USE
+Stage 1 — Measured blockout:
+Create both vehicles from hull, turret, gun, wheels and tracks. Use flat gray materials, a shared ground plane, a 1.80 m scale figure and identical camera scales. Render side, front, top and three-quarter views. Include a dimension report. Save a checkpoint and present it for silhouette review before detailed modeling.
+
+Stage 2 — Functional detail:
+After the blockout review, add running gear, hatch geometry, service panels, grilles, towing gear and weapon fittings. Check hatch access and turret/gun clearances. Keep unreviewed choices editable.
+
+Stage 3 — Finish and delivery:
+Add restrained materials, wear and optional markings only after proportions are approved. Deliver the native editable scene, one GLB per tank, the generation script and parameter file if used, plus comparison renders and a brief assumptions/change note. If a format or renderer is unavailable, report that explicitly and deliver the usable outputs.
+
+REVIEW GATE
+The first review should answer:
+1. Do the two measured models read as distinct vehicles in flat gray?
+2. Are human-scale fittings consistent across both?
+3. Does the Kaisersturm remain within its established size envelope?
+4. Does the Bastion show exactly four paired bogies/eight road wheels per side?
+5. Can we see how the crew enters, how the turret rotates and how the engine is serviced?
+6. Are new design choices explicitly separated from retained working specifications?
+
+Do not claim mass validation from bounding boxes, engineering validation from a render, or historical accuracy for fictional specifications.
+
+PROJECT REFERENCES USED
+- Armored Recognition Sheet — 1940, working v0.2: Kaisersturm silhouette, approximately 80-tonne class and national procurement contrast.
+- Establish Kaisersturm Models discussion, 10–11 October 2026: B geometry and diesel/layout direction; corrected scale comparison; D/E progression.
+- Kaisersturm-B-Jagdtiger-Measured-Envelopes.png: proposed B gun-forward envelope 10.6 x 4.0 x 3.2 m; explicitly not a mass calculation or a silhouette drawing.
+- Weltenbrecher-Bastion-Working-Spec-v0-1.pdf, 13 October 2026, especially pages 1, 3, 5–7: M12A2 working dimensions, running gear, crew access, chemical protection and visual identity.
+
