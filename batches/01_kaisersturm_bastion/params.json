@@ -1,0 +1,623 @@
+{
+  "_conventions": {
+    "units": "metres",
+    "axes": "+X forward, +Y vehicle left, +Z up",
+    "origin": "hull longitudinal and lateral centre, on the ground plane (z = 0)",
+    "status_tags": "RETAINED = working spec from the brief; PROPOSAL = new art-direction choice made for this blockout, editable; DERIVED = computed to satisfy a RETAINED envelope"
+  },
+  "kaisersturm_b": {
+    "label": "Kaisersturm Ausf. B",
+    "envelope": {
+      "hull_length": {
+        "value": 8.2,
+        "status": "RETAINED",
+        "includes": "hull armour from rear plate to nose; excludes gun, tow fittings"
+      },
+      "overall_length_gun_fwd": {
+        "value": 10.6,
+        "status": "RETAINED",
+        "includes": "hull rear plate to muzzle, gun at 0 deg traverse and elevation"
+      },
+      "overall_width": {
+        "value": 4.0,
+        "status": "RETAINED",
+        "includes": "outer faces of side skirts"
+      },
+      "cupola_height": {
+        "value": 3.2,
+        "status": "RETAINED",
+        "includes": "ground to top of commander's cupola; excludes aerials"
+      },
+      "track_width": {
+        "value": 0.9,
+        "status": "RETAINED"
+      },
+      "main_gun_bore": {
+        "value": 0.105,
+        "status": "RETAINED"
+      }
+    },
+    "hull": {
+      "belly_z": 0.5,
+      "sponson_floor_z": 1.4,
+      "roof_z": 1.92,
+      "lower_half_width": 0.92,
+      "upper_half_width_at_floor": 1.92,
+      "upper_half_width_at_roof": 1.8,
+      "nose_z": 1.15,
+      "lower_glacis_start_x": 3.4,
+      "glacis_top_x": 2.9,
+      "_status": "PROPOSAL (profile), DERIVED (length/width fit)"
+    },
+    "running_gear": {
+      "layout": "individual torsion-bar trailing arms, double road wheel per station, single row, no interleave",
+      "stations_per_side": 8,
+      "_stations_status": "PROPOSAL (brief marks wheel count as new)",
+      "first_station_x": 2.8,
+      "last_station_x": -2.8,
+      "road_wheel_radius": 0.38,
+      "double_wheel_offset": 0.17,
+      "disc_thickness": 0.2,
+      "track_centre_y": 1.46,
+      "track_pitch": 0.17,
+      "track_thickness": 0.1,
+      "sprocket": {
+        "position": "rear",
+        "x": -3.585,
+        "z": 0.8,
+        "r": 0.39,
+        "_status": "PROPOSAL (provisional per brief)"
+      },
+      "idler": {
+        "position": "front",
+        "x": 3.6,
+        "z": 0.78,
+        "r": 0.36,
+        "_status": "PROPOSAL (provisional per brief)"
+      },
+      "return_rollers_x": [
+        -1.6,
+        0.0,
+        1.6
+      ],
+      "return_roller_r": 0.14,
+      "arm_pivot_offset_x": 0.42,
+      "arm_pivot_z": 0.72
+    },
+    "skirts": {
+      "panels_per_side": 5,
+      "x_from": -3.75,
+      "x_to": 3.45,
+      "bottom_z": 0.44,
+      "top_z": 1.42,
+      "thickness": 0.06,
+      "inner_y": 1.94,
+      "_status": "PROPOSAL"
+    },
+    "turret": {
+      "ring_centre_x": 0.2,
+      "ring_diameter": 2.3,
+      "base_gap": 0.05,
+      "height": 0.88,
+      "plan_bottom": [
+        [
+          1.5,
+          -0.9
+        ],
+        [
+          1.5,
+          0.9
+        ],
+        [
+          1.18,
+          1.3
+        ],
+        [
+          -0.95,
+          1.3
+        ],
+        [
+          -1.42,
+          0.95
+        ],
+        [
+          -1.6,
+          0.5
+        ],
+        [
+          -1.6,
+          -0.5
+        ],
+        [
+          -1.42,
+          -0.95
+        ],
+        [
+          -0.95,
+          -1.3
+        ],
+        [
+          1.18,
+          -1.3
+        ]
+      ],
+      "plan_top": [
+        [
+          1.36,
+          -0.74
+        ],
+        [
+          1.36,
+          0.74
+        ],
+        [
+          1.05,
+          1.05
+        ],
+        [
+          -0.85,
+          1.05
+        ],
+        [
+          -1.15,
+          0.8
+        ],
+        [
+          -1.28,
+          0.4
+        ],
+        [
+          -1.28,
+          -0.4
+        ],
+        [
+          -1.15,
+          -0.8
+        ],
+        [
+          -0.85,
+          -1.05
+        ],
+        [
+          1.05,
+          -1.05
+        ]
+      ],
+      "_status": "PROPOSAL (contours); ring diameter PROPOSAL"
+    },
+    "gun": {
+      "trunnion_rel_x": 1.4,
+      "trunnion_rel_z": 0.5,
+      "mantlet": {
+        "back": -0.2,
+        "front": 0.65,
+        "half_width": 0.675,
+        "half_height": 0.36,
+        "chamfer": 0.1
+      },
+      "barrel_r_breech": 0.155,
+      "barrel_r_muzzle": 0.12,
+      "muzzle_swell_r": 0.13,
+      "muzzle_swell_len": 0.38,
+      "sleeve_r": 0.21,
+      "sleeve_to": 1.0,
+      "muzzle_device": "none (plain muzzle swell)",
+      "_status": "PROPOSAL (mantlet shape, no muzzle brake)"
+    },
+    "cupola": {
+      "rel_x": -0.5,
+      "rel_y": 0.6,
+      "r": 0.38,
+      "side": "turret left",
+      "_status": "PROPOSAL (side)"
+    },
+    "hatches": {
+      "driver": {
+        "x": 2.5,
+        "y": 0.75,
+        "r": 0.3
+      },
+      "radio_op": {
+        "x": 2.5,
+        "y": -0.75,
+        "r": 0.3
+      },
+      "loader": {
+        "rel_x": -0.35,
+        "rel_y": -0.65,
+        "len": 0.72,
+        "wid": 0.62
+      },
+      "_status": "PROPOSAL (positions); sizes chosen for a 1.80 m crewman"
+    }
+  },
+  "bastion_m12a2": {
+    "label": "M12A2 Bastion",
+    "envelope": {
+      "hull_length": {
+        "value": 7.5,
+        "status": "RETAINED",
+        "includes": "hull armour rear plate to nose"
+      },
+      "overall_length_gun_fwd": {
+        "value": 10.0,
+        "status": "RETAINED",
+        "includes": "hull rear plate to muzzle, gun at 0 deg"
+      },
+      "overall_width": {
+        "value": 3.65,
+        "status": "RETAINED",
+        "includes": "track outer edges / fender line"
+      },
+      "turret_roof_height": {
+        "value": 2.9,
+        "status": "RETAINED"
+      },
+      "cupola_height": {
+        "value": 3.15,
+        "status": "RETAINED",
+        "includes": "excludes aerials and external roof gun"
+      },
+      "track_width": {
+        "value": 0.82,
+        "status": "RETAINED"
+      },
+      "ground_contact": {
+        "value": 4.7,
+        "status": "RETAINED",
+        "includes": "first to last road-wheel centre"
+      },
+      "turret_ring_diameter": {
+        "value": 2.25,
+        "status": "RETAINED"
+      },
+      "main_gun_bore": {
+        "value": 0.105,
+        "status": "RETAINED"
+      }
+    },
+    "hull": {
+      "belly_z": 0.47,
+      "sponson_floor_z": 1.3,
+      "roof_z": 1.86,
+      "engine_deck_z": 1.8,
+      "lower_half_width": 0.97,
+      "upper_half_width_at_floor": 1.825,
+      "upper_half_width_at_roof": 1.7,
+      "nose_z": 1.0,
+      "lower_glacis_start_x": 3.05,
+      "glacis_top_x": 1.62,
+      "deck_step_x": -0.85,
+      "_status": "PROPOSAL (profile incl. rounded cast nose, radius 0.30 m), DERIVED (length/width fit)",
+      "nose_radius": 0.3
+    },
+    "running_gear": {
+      "layout": "four external paired bogie modules per side (RETAINED); spring housing inboard (PROPOSAL)",
+      "bogies_per_side": 4,
+      "wheels_per_bogie": 2,
+      "contact_first_x": 2.35,
+      "contact_last_x": -2.35,
+      "in_bogie_spacing": 0.62,
+      "road_wheel_radius": 0.28,
+      "double_wheel_offset": 0.135,
+      "disc_thickness": 0.17,
+      "track_centre_y": 1.415,
+      "track_pitch": 0.155,
+      "track_thickness": 0.09,
+      "sprocket": {
+        "position": "rear",
+        "x": -3.2,
+        "z": 0.78,
+        "r": 0.36,
+        "_status": "RETAINED (rear drive)"
+      },
+      "idler": {
+        "position": "front",
+        "x": 3.1,
+        "z": 0.78,
+        "r": 0.3
+      },
+      "return_rollers_x": [
+        -1.4,
+        0.0,
+        1.4
+      ],
+      "return_roller_r": 0.13
+    },
+    "turret": {
+      "ring_centre_x": 0.0,
+      "base_gap": 0.015,
+      "height": 1.025,
+      "plan_body": [
+        [
+          1.15,
+          -0.7
+        ],
+        [
+          1.15,
+          0.7
+        ],
+        [
+          0.8,
+          1.25
+        ],
+        [
+          0.0,
+          1.38
+        ],
+        [
+          -0.9,
+          1.3
+        ],
+        [
+          -1.2,
+          1.05
+        ],
+        [
+          -1.3,
+          0.0
+        ],
+        [
+          -1.2,
+          -1.05
+        ],
+        [
+          -0.9,
+          -1.3
+        ],
+        [
+          0.0,
+          -1.38
+        ],
+        [
+          0.8,
+          -1.25
+        ]
+      ],
+      "plan_bustle": [
+        [
+          -0.95,
+          1.12
+        ],
+        [
+          -1.35,
+          1.15
+        ],
+        [
+          -1.9,
+          1.05
+        ],
+        [
+          -2.08,
+          0.75
+        ],
+        [
+          -2.12,
+          0.0
+        ],
+        [
+          -2.08,
+          -0.75
+        ],
+        [
+          -1.9,
+          -1.05
+        ],
+        [
+          -1.35,
+          -1.15
+        ],
+        [
+          -0.95,
+          -1.12
+        ]
+      ],
+      "bustle_bottom_rel_z": 0.32,
+      "_status": "PROPOSAL (rounded cast-looking form language, per brief art direction)"
+    },
+    "gun": {
+      "trunnion_rel_x": 1.06,
+      "trunnion_rel_z": 0.45,
+      "barrel_r_breech": 0.13,
+      "barrel_r_muzzle": 0.095,
+      "sleeve_r": 0.17,
+      "sleeve_to": 0.65,
+      "muzzle_device": "double-baffle muzzle brake",
+      "_status": "PROPOSAL (brief: editable art proposal)"
+    },
+    "cupola": {
+      "rel_x": -0.35,
+      "rel_y": -0.62,
+      "r": 0.36,
+      "side": "turret right",
+      "_status": "RETAINED (side)"
+    },
+    "hatches": {
+      "driver": {
+        "x": 1.25,
+        "y": 1.26,
+        "r": 0.3,
+        "_status": "RETAINED (front left)"
+      },
+      "bow_gunner": {
+        "x": 1.25,
+        "y": -1.26,
+        "r": 0.3,
+        "_status": "RETAINED (front right)"
+      },
+      "loader": {
+        "rel_x": -0.25,
+        "rel_y": 0.62,
+        "len": 0.65,
+        "wid": 0.55,
+        "_status": "RETAINED (turret left)"
+      }
+    }
+  },
+  "scale_figure_height": 1.8,
+  "stage2": {
+    "_status": "All values in this section are PROPOSALS added in Stage 2 (editable art/functional direction, not canon).",
+    "kaisersturm_b": {
+      "hull_hatch_open_deg": 95,
+      "turret_hatch_open_deg": 100,
+      "driver_visor_xy": [
+        3.05,
+        0.78
+      ],
+      "bow_mg_xy": [
+        3.3,
+        -0.8
+      ],
+      "fan_x": -3.25,
+      "louvre_x": -2.52,
+      "engine_panel_x": -2.95,
+      "spare_link_rows_s": [
+        0.46,
+        0.68
+      ],
+      "tool_x": [
+        -3.95,
+        -2.25
+      ],
+      "aerial_x": -1.95,
+      "mantlet_R_back": 0.38,
+      "port_gap": 0.025,
+      "coax_y": 0.42,
+      "sight_y": -0.44,
+      "breech_len": 1.1,
+      "breech_half_h": 0.22,
+      "cupola_blocks": 7,
+      "cupola_hinge_dir_deg": 180,
+      "loader_periscope_xy": [
+        0.3,
+        -0.65
+      ],
+      "turret_vent_xy": [
+        0.55,
+        0.3
+      ],
+      "turret_lift_eyes": [
+        [
+          0.85,
+          0.85
+        ],
+        [
+          0.85,
+          -0.85
+        ],
+        [
+          -1.05,
+          0.0
+        ]
+      ],
+      "_notes": "Bow MG in a ball mount and a driver's visor block are new proposals. Breech placeholder includes a 6 cm roof-armour allowance.",
+      "turret_wall": 0.12,
+      "turret_roof_t": 0.06,
+      "lid_periscope_scale": 0.9,
+      "lid_periscope_toward_hinge": 0.0
+    },
+    "bastion_m12a2": {
+      "hull_hatch_open_deg": 95,
+      "turret_hatch_open_deg": 100,
+      "rear_door_open_deg": 100,
+      "bow_mg_xy": [
+        2.45,
+        -0.7
+      ],
+      "grille_x": -2.62,
+      "grille_len": 1.5,
+      "filter_box_xy": [
+        -1.55,
+        -1.25
+      ],
+      "tool_x": [
+        -3.4,
+        -2.05
+      ],
+      "stowage_box_x": [
+        -3.4,
+        -2.3
+      ],
+      "hull_lift_eyes": [
+        [
+          2.2,
+          1.45,
+          1.675
+        ],
+        [
+          2.2,
+          -1.45,
+          1.675
+        ],
+        [
+          -3.55,
+          1.6,
+          1.8
+        ],
+        [
+          -3.55,
+          -1.6,
+          1.8
+        ]
+      ],
+      "mantlet_R_back": 0.33,
+      "port_gap": 0.025,
+      "mantlet_half_w": 0.54,
+      "mantlet_half_h": 0.31,
+      "coax_y": 0.3,
+      "sight_y": -0.3,
+      "breech_len": 1.0,
+      "breech_half_h": 0.2,
+      "cupola_blocks": 6,
+      "cupola_hinge_dir_deg": -90,
+      "loader_periscope_xy": [
+        0.3,
+        0.55
+      ],
+      "gunner_periscope_xy": [
+        0.45,
+        -0.4
+      ],
+      "turret_vent_xy": [
+        0.3,
+        0.1
+      ],
+      "turret_lift_eyes": [
+        [
+          0.5,
+          0.8,
+          1.02
+        ],
+        [
+          0.5,
+          -0.8,
+          1.02
+        ],
+        [
+          -1.85,
+          0.0,
+          1.01
+        ]
+      ],
+      "aerial_xy": [
+        [
+          -1.7,
+          0.6
+        ],
+        [
+          -1.7,
+          -0.6
+        ]
+      ],
+      "roof_mg_xy": [
+        -0.85,
+        0.0
+      ],
+      "_notes": "Crew air filter/blower box with armoured intake cowl sits at the front-right of the engine deck, separate from the cooling grilles.",
+      "turret_wall": 0.1,
+      "turret_roof_t": 0.06,
+      "lid_periscope_scale": 0.75,
+      "lid_periscope_toward_hinge": 0.13
+    }
+  }
+}

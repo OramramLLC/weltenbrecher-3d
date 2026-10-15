@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Blender autosave backups
+*.blend1
+*.blend2
+
+# Scratch files
+scratch/
+tmp/
+*.tmp
+*.bak
+*~
+.DS_Store

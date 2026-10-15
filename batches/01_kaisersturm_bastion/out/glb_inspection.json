@@ -1,0 +1,34 @@
+{
+  "KS_B": {
+    "mesh_nodes": 306,
+    "track_links": 202,
+    "road_wheels": 16,
+    "glb_bounds_min": [
+      -4.39,
+      -2.0,
+      -0.001
+    ],
+    "glb_bounds_max": [
+      6.5,
+      2.0,
+      4.04
+    ],
+    "glb_triangles": 47080
+  },
+  "M12A2": {
+    "mesh_nodes": 284,
+    "track_links": 194,
+    "road_wheels": 16,
+    "glb_bounds_min": [
+      -3.95,
+      -1.825,
+      -0.001
+    ],
+    "glb_bounds_max": [
+      6.25,
+      1.825,
+      4.995
+    ],
+    "glb_triangles": 50838
+  }
+}

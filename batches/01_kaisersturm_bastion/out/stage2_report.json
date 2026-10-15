@@ -1,0 +1,298 @@
+{
+  "KS_B": {
+    "hull_length": 8.2,
+    "overall_length_gun_fwd": 10.6,
+    "core_envelope_LxWxH": [
+      10.6,
+      4.0,
+      3.201
+    ],
+    "bbox_incl_fittings_LxWxH": [
+      10.89,
+      4.0,
+      4.041
+    ],
+    "overall_width": 4.0,
+    "cupola_height": 3.2,
+    "core_max_height": 3.2,
+    "turret_roof_height": 2.85,
+    "hull_roof_height": 1.92,
+    "track_width": 0.9,
+    "road_wheels_per_side": 8,
+    "first_to_last_road_wheel_centre": 5.6,
+    "flat_ground_run_of_links": 5.601,
+    "track_links_per_side": 101,
+    "muzzle_x": 6.5,
+    "hull_rear_x": -4.1,
+    "ground_clearance_hull": 0.5,
+    "triangles_exported": 47080,
+    "objects_exported": 308,
+    "excluded_from_envelope": [
+      [
+        "KS_B_Aerial_1",
+        "aerial (brief: aerials not part of the envelope)"
+      ],
+      [
+        "KS_B_Aerial_2",
+        "aerial (brief: aerials not part of the envelope)"
+      ],
+      [
+        "KS_B_TowEye_F1",
+        "tow fitting (brief: hull length excludes tow fittings)"
+      ],
+      [
+        "KS_B_TowEye_F2",
+        "tow fitting (brief: hull length excludes tow fittings)"
+      ],
+      [
+        "KS_B_TowEye_R1",
+        "tow fitting (brief: hull length excludes tow fittings)"
+      ],
+      [
+        "KS_B_TowEye_R2",
+        "tow fitting (brief: hull length excludes tow fittings)"
+      ]
+    ],
+    "crew_openings": {
+      "KS_B_HatchRim_driver": 0.6,
+      "KS_B_HatchRim_radio_op": 0.6,
+      "KS_B_Cupola": 0.6,
+      "KS_B_HatchRim_loader": [
+        0.72,
+        0.62
+      ]
+    }
+  },
+  "M12A2": {
+    "hull_length": 7.5,
+    "overall_length_gun_fwd": 10.0,
+    "core_envelope_LxWxH": [
+      10.047,
+      3.65,
+      3.151
+    ],
+    "bbox_incl_fittings_LxWxH": [
+      10.2,
+      3.65,
+      4.996
+    ],
+    "overall_width": 3.65,
+    "cupola_height": 3.15,
+    "core_max_height": 3.15,
+    "turret_roof_height": 2.9,
+    "hull_roof_height": 1.86,
+    "track_width": 0.82,
+    "road_wheels_per_side": 8,
+    "first_to_last_road_wheel_centre": 4.7,
+    "flat_ground_run_of_links": 4.668,
+    "track_links_per_side": 97,
+    "muzzle_x": 6.25,
+    "hull_rear_x": -3.75,
+    "ground_clearance_hull": 0.47,
+    "triangles_exported": 50838,
+    "objects_exported": 295,
+    "excluded_from_envelope": [
+      [
+        "M12A2_Aerial_1",
+        "aerial (brief: aerials not part of the envelope)"
+      ],
+      [
+        "M12A2_Aerial_2",
+        "aerial (brief: aerials not part of the envelope)"
+      ],
+      [
+        "M12A2_RoofMG50",
+        "external .50 roof mount (brief: excluded from height envelope; removable)"
+      ],
+      [
+        "M12A2_RoofMG50_Mount",
+        "external .50 roof mount (brief: excluded from height envelope; removable)"
+      ],
+      [
+        "M12A2_TowShackle_F1",
+        "tow fitting (brief: hull length excludes tow fittings)"
+      ],
+      [
+        "M12A2_TowShackle_F2",
+        "tow fitting (brief: hull length excludes tow fittings)"
+      ],
+      [
+        "M12A2_TowShackle_R1",
+        "tow fitting (brief: hull length excludes tow fittings)"
+      ],
+      [
+        "M12A2_TowShackle_R2",
+        "tow fitting (brief: hull length excludes tow fittings)"
+      ]
+    ],
+    "crew_openings": {
+      "M12A2_HatchRim_driver": 0.6,
+      "M12A2_HatchRim_bow_gunner": 0.6,
+      "M12A2_Cupola": 0.56,
+      "M12A2_HatchRim_loader": [
+        0.65,
+        0.55
+      ]
+    },
+    "bogie_modules_per_side": 4
+  },
+  "figure_height": 1.8,
+  "clearances": {
+    "KS_B": {
+      "neutral_turret_vs_hull": [],
+      "neutral_gun_vs_turret": [],
+      "neutral_breech_vs_turret": [],
+      "neutral_running_gear_vs_hull": [],
+      "neutral_tracks_vs_hull": [],
+      "neutral_suspension_vs_tracks": [],
+      "neutral_tracks_vs_skirts": [],
+      "neutral_wheels_vs_skirts": [],
+      "traverse_sweep_closed_hatches": [],
+      "gun_limits": [
+        {
+          "traverse_deg": 0,
+          "max_depression_deg": -7.5,
+          "depression_limited_by": "Breech_Clearance x Turret",
+          "max_elevation_deg": 30.0,
+          "elevation_limited_by": "scan limit"
+        },
+        {
+          "traverse_deg": 45,
+          "max_depression_deg": -7.5,
+          "depression_limited_by": "Breech_Clearance x Turret",
+          "max_elevation_deg": 30.0,
+          "elevation_limited_by": "scan limit"
+        },
+        {
+          "traverse_deg": 90,
+          "max_depression_deg": -7.5,
+          "depression_limited_by": "Breech_Clearance x Turret",
+          "max_elevation_deg": 30.0,
+          "elevation_limited_by": "scan limit"
+        },
+        {
+          "traverse_deg": 135,
+          "max_depression_deg": -7.5,
+          "depression_limited_by": "Breech_Clearance x Turret",
+          "max_elevation_deg": 30.0,
+          "elevation_limited_by": "scan limit"
+        },
+        {
+          "traverse_deg": 180,
+          "max_depression_deg": -7.0,
+          "depression_limited_by": "Barrel x EngineAccessPanel; Barrel x Hull",
+          "max_elevation_deg": 30.0,
+          "elevation_limited_by": "scan limit"
+        }
+      ],
+      "hatches": {
+        "KS_B_HatchHinge_driver": {
+          "open_deg": 95,
+          "fouls_fixed_parts_when_open": [],
+          "turret_traverse_blocked_while_open": [
+            "30..30 deg"
+          ]
+        },
+        "KS_B_HatchHinge_radio_op": {
+          "open_deg": 95,
+          "fouls_fixed_parts_when_open": [],
+          "turret_traverse_blocked_while_open": [
+            "330..330 deg"
+          ]
+        },
+        "KS_B_HatchHinge_cupola": {
+          "open_deg": 100,
+          "fouls_parts_when_open": []
+        },
+        "KS_B_HatchHinge_loader": {
+          "open_deg": 100,
+          "fouls_parts_when_open": []
+        }
+      }
+    },
+    "M12A2": {
+      "neutral_turret_vs_hull": [],
+      "neutral_gun_vs_turret": [],
+      "neutral_breech_vs_turret": [],
+      "neutral_running_gear_vs_hull": [],
+      "neutral_tracks_vs_hull": [],
+      "neutral_suspension_vs_tracks": [],
+      "neutral_tracks_vs_skirts": [],
+      "neutral_wheels_vs_skirts": [],
+      "traverse_sweep_closed_hatches": [],
+      "gun_limits": [
+        {
+          "traverse_deg": 0,
+          "max_depression_deg": -16.0,
+          "depression_limited_by": "Mantlet x Turret",
+          "max_elevation_deg": 24.5,
+          "elevation_limited_by": "Mantlet x Turret"
+        },
+        {
+          "traverse_deg": 45,
+          "max_depression_deg": -3.5,
+          "depression_limited_by": "Barrel x HatchLid_driver",
+          "max_elevation_deg": 24.5,
+          "elevation_limited_by": "Mantlet x Turret"
+        },
+        {
+          "traverse_deg": 90,
+          "max_depression_deg": -16.0,
+          "depression_limited_by": "Mantlet x Turret",
+          "max_elevation_deg": 24.5,
+          "elevation_limited_by": "Mantlet x Turret"
+        },
+        {
+          "traverse_deg": 135,
+          "max_depression_deg": -15.0,
+          "depression_limited_by": "Barrel x Hull",
+          "max_elevation_deg": 24.5,
+          "elevation_limited_by": "Mantlet x Turret"
+        },
+        {
+          "traverse_deg": 180,
+          "max_depression_deg": -6.0,
+          "depression_limited_by": "Barrel x ExhaustCowl",
+          "max_elevation_deg": 24.5,
+          "elevation_limited_by": "Mantlet x Turret"
+        }
+      ],
+      "hatches": {
+        "M12A2_HatchHinge_driver": {
+          "open_deg": 95,
+          "fouls_fixed_parts_when_open": [],
+          "turret_traverse_blocked_while_open": [
+            "45..60 deg",
+            "210..270 deg"
+          ]
+        },
+        "M12A2_HatchHinge_bow_gunner": {
+          "open_deg": 95,
+          "fouls_fixed_parts_when_open": [],
+          "turret_traverse_blocked_while_open": [
+            "90..150 deg",
+            "300..315 deg"
+          ]
+        },
+        "M12A2_RearDoorHinge_L": {
+          "open_deg": 100,
+          "fouls_fixed_parts_when_open": [],
+          "turret_traverse_blocked_while_open": []
+        },
+        "M12A2_RearDoorHinge_R": {
+          "open_deg": 100,
+          "fouls_fixed_parts_when_open": [],
+          "turret_traverse_blocked_while_open": []
+        },
+        "M12A2_HatchHinge_cupola": {
+          "open_deg": 100,
+          "fouls_parts_when_open": []
+        },
+        "M12A2_HatchHinge_loader": {
+          "open_deg": 100,
+          "fouls_parts_when_open": []
+        }
+      }
+    }
+  }
+}
