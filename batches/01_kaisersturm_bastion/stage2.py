@@ -548,7 +548,7 @@ def detail_bastion(coll, root):
 
     C = B["cupola"]; ztop = E["cupola_height"]["value"] - zr
     cupola(tag, coll, tp, C["rel_x"], C["rel_y"], roof_local, ztop, C["r"], D["cupola_blocks"], D["cupola_hinge_dir_deg"],
-           D["turret_hatch_open_deg"], band_frac=0.45)
+           D.get("cupola_open_deg", D["turret_hatch_open_deg"]), band_frac=0.45)
     h = B["hatches"]["loader"]
     rect_hatch(tag, "loader", coll, tp, (h["rel_x"], h["rel_y"], roof_local), h["len"], h["wid"], "+y", 0.06, 0.07, 0.055,
                D["turret_hatch_open_deg"])

@@ -458,7 +458,7 @@
   "stage2": {
     "_status": "All values in this section are PROPOSALS added in Stage 2 (editable art/functional direction, not canon).",
     "kaisersturm_b": {
-      "hull_hatch_open_deg": 95,
+      "hull_hatch_open_deg": 155,
       "turret_hatch_open_deg": 100,
       "driver_visor_xy": [
         3.05,
@@ -556,10 +556,11 @@
         "knuckle_r": 0.042,
         "pin_head_r": 0.028
       },
-      "_rev1_notes": "Rev. 1 (review 15 Oct 2026): dischargers, headlights, tail lights, track pins and elevating-gear stop added. All PROPOSALS."
+      "_rev1_notes": "Rev. 1 (review 15 Oct 2026): dischargers, headlights, tail lights, track pins and elevating-gear stop added. All PROPOSALS.",
+      "_rev2_notes": "Rev. 2 (15 Oct 2026): hull hatch lids open to 155 deg (was 95), per Nate allowing wider opening; 155 is the widest before the lid meets the hull roof (160)."
     },
     "bastion_m12a2": {
-      "hull_hatch_open_deg": 95,
+      "hull_hatch_open_deg": 165,
       "turret_hatch_open_deg": 100,
       "rear_door_open_deg": 100,
       "bow_mg_xy": [
@@ -708,7 +709,9 @@
         "pin_x": 0.05,
         "pin_r": 0.022
       },
-      "_rev1_notes": "Rev. 1 (review 15 Oct 2026): .50 moved forward beside the cupola (was [-0.85, 0.0]); dischargers, headlights, tail lights, track pins and end connectors, elevating-gear stop added. All PROPOSALS except the .50 move, which Nate asked for."
+      "_rev1_notes": "Rev. 1 (review 15 Oct 2026): .50 moved forward beside the cupola (was [-0.85, 0.0]); dischargers, headlights, tail lights, track pins and end connectors, elevating-gear stop added. All PROPOSALS except the .50 move, which Nate asked for.",
+      "cupola_open_deg": 155,
+      "_rev2_notes": "Rev. 2 (15 Oct 2026): hull hatch lids open to 165 deg (was 95) and the cupola lid to 155 deg (was 100), per Nate allowing wider opening."
     }
   }
 }

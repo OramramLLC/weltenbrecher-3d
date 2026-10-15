@@ -187,18 +187,20 @@
       ],
       "hatches": {
         "KS_B_HatchHinge_driver": {
-          "open_deg": 95,
+          "open_deg": 155,
           "fouls_fixed_parts_when_open": [],
           "turret_traverse_blocked_while_open": [
-            "30..30 deg"
-          ]
+            "35..40 deg"
+          ],
+          "gun_elevation_for_clear_traverse_deg": 2.5
         },
         "KS_B_HatchHinge_radio_op": {
-          "open_deg": 95,
+          "open_deg": 155,
           "fouls_fixed_parts_when_open": [],
           "turret_traverse_blocked_while_open": [
-            "330..330 deg"
-          ]
+            "320..325 deg"
+          ],
+          "gun_elevation_for_clear_traverse_deg": 2.5
         },
         "KS_B_HatchHinge_cupola": {
           "open_deg": 100,
@@ -301,20 +303,14 @@
       ],
       "hatches": {
         "M12A2_HatchHinge_driver": {
-          "open_deg": 95,
+          "open_deg": 165,
           "fouls_fixed_parts_when_open": [],
-          "turret_traverse_blocked_while_open": [
-            "45..60 deg",
-            "210..270 deg"
-          ]
+          "turret_traverse_blocked_while_open": []
         },
         "M12A2_HatchHinge_bow_gunner": {
-          "open_deg": 95,
+          "open_deg": 165,
           "fouls_fixed_parts_when_open": [],
-          "turret_traverse_blocked_while_open": [
-            "90..150 deg",
-            "300..315 deg"
-          ]
+          "turret_traverse_blocked_while_open": []
         },
         "M12A2_RearDoorHinge_L": {
           "open_deg": 100,
@@ -327,7 +323,7 @@
           "turret_traverse_blocked_while_open": []
         },
         "M12A2_HatchHinge_cupola": {
-          "open_deg": 100,
+          "open_deg": 155,
           "fouls_parts_when_open": []
         },
         "M12A2_HatchHinge_loader": {
@@ -397,10 +393,7 @@
         },
         "pintle_traverse_blocked_deg": {
           "hatches_closed": [],
-          "hatches_open": [
-            "75..75 deg",
-            "225..255 deg"
-          ]
+          "hatches_open": []
         }
       }
     }

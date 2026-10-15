@@ -711,6 +711,8 @@ def arcs(degs, step=15):
         groups[0][0] = groups[-1][0] - 360; groups.pop()
     return [f"{a}..{b} deg" for a, b in groups]
 
+OPEN_STEP = 5   # traverse sampling (deg) for open-hatch and pintle sweeps
+
 def collision_suite(tag, coll):
     O = bpy.data.objects
     root, tp, gp = O[f"{tag}_Root"], O[f"{tag}_Turret_Pivot"], O[f"{tag}_Gun_Pivot"]
@@ -781,14 +783,26 @@ def collision_suite(tag, coll):
         set_open(h); upd()
         static = overlaps(lids[h.name], [o for o in hull_fixed if o not in own])
         blocked = []
-        for deg in range(0, 360, 15):
+        for deg in range(0, 360, OPEN_STEP):
             tp.rotation_euler = (0, 0, math.radians(deg)); upd()
             if overlaps(turret_all, lids[h.name]): blocked.append(deg)
+        # if the gun fouls the open lid, find the smallest elevation that clears a full 1-deg traverse sweep
+        need = None
+        if blocked:
+            for k in range(0, int(2 * (stop or 20)) + 1):
+                gp.rotation_euler = (0, math.radians(-0.5 * k), 0)
+                if not any((setattr(tp, "rotation_euler", (0, 0, math.radians(d))), upd(), overlaps(turret_all, lids[h.name]))[2]
+                           for d in range(360)):
+                    need = 0.5 * k
+                    break
+            gp.rotation_euler = (0, 0, 0)
         tp.rotation_euler = (0, 0, 0)
         h.rotation_euler = (0, 0, h.get("yaw0", h.rotation_euler.z)) if h["open_axis"] == "Z" else (0, 0, h.rotation_euler.z)
         upd()
         hatch[h.name] = {"open_deg": h["open_deg"], "fouls_fixed_parts_when_open": static,
-                         "turret_traverse_blocked_while_open": arcs(blocked)}
+                         "turret_traverse_blocked_while_open": arcs(blocked, OPEN_STEP)}
+        if blocked:
+            hatch[h.name]["gun_elevation_for_clear_traverse_deg"] = need
     for h in t_hinges:
         own = set(lids[h.name])
         key = h.name.split("Hinge_")[-1]
@@ -856,10 +870,10 @@ def roof_mg_checks(tag, coll):
     for opened in (False, True):
         set_all_hatches(coll, opened)
         blocked = []
-        for deg in range(0, 360, 15):
+        for deg in range(0, 360, OPEN_STEP):
             piv.rotation_euler = (0, 0, math.radians(deg)); bpy.context.view_layer.update()
             if overlaps([gun], others): blocked.append(deg)
-        arcs_["hatches_open" if opened else "hatches_closed"] = arcs(blocked)
+        arcs_["hatches_open" if opened else "hatches_closed"] = arcs(blocked, OPEN_STEP)
     piv.rotation_euler = (0, 0, 0); set_all_hatches(coll, False)
     return {"operator": gun["operator"], "pintle_xy_turret_space": [round(v, 3) for v in piv.location[:2]],
             "grip_height_above_ground_m": round(grip.z, 3),

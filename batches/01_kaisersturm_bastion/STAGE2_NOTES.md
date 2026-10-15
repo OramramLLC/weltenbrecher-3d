@@ -2,7 +2,9 @@
 
 15 October 2026. Builds on the approved Stage 1 blockout (lowered Kaisersturm skirts, rounded Bastion nose). Still flat gray: materials, wear and markings are Stage 3.
 
-**Revision 1 (15 Oct 2026, after Nate's review):** Bastion .50 moved forward beside the cupola; smoke and gas dischargers, headlights and tail lights, track pins and end connectors, and an elevating-gear stop added to both tanks. See "Revision 1" below. Stage 2 is awaiting review again.
+**Revision 1 (15 Oct 2026, after Nate's review):** Bastion .50 moved forward beside the cupola; smoke and gas dischargers, headlights and tail lights, track pins and end connectors, and an elevating-gear stop added to both tanks. See "Revision 1" below. 
+
+**Revision 2 (15 Oct 2026):** Nate allowed hatches to open further. Hull hatch lids now open to 155° (Kaisersturm) and 165° (Bastion), and the Bastion cupola lid to 155°. See "Revision 2" below. Stage 2 is awaiting review again.
 
 Production-design concepts only. Clearance checks show the parts don't collide as modeled. They say nothing about armour, mass, ballistics or whether a real crew could work the vehicle.
 
@@ -20,7 +22,7 @@ Production-design concepts only. Clearance checks show the parts don't collide a
 ## How the moving parts work
 
 - **Turret:** `<TAG>_Turret_Pivot` (rotate about Z). **Gun:** `<TAG>_Gun_Pivot` on the trunnion (rotate about local Y; negative raises the muzzle). Mantlet, barrel, coax and the breech placeholder ride on it.
-- **Hatches, lids, cupola lids:** `<TAG>_HatchHinge_<name>` empties sit on each hinge line. Open by rotating about local Y by −`open_deg` (95° hull hatches, 100° turret hatches, stored on the empty).
+- **Hatches, lids, cupola lids:** `<TAG>_HatchHinge_<name>` empties sit on each hinge line. Open by rotating about local Y by −`open_deg`, stored on the empty. Hull hatches open to 155° (Kaisersturm) and 165° (Bastion), the Bastion cupola to 155°, and the other turret hatches to 100°.
 - **Bastion rear doors:** `M12A2_RearDoorHinge_L/R`, rotate about Z by `open_sign × open_deg` (100°). They swing outward from their outer edges.
 - Every hinge carries a note property saying how it opens. The open-pose GLBs show the result.
 - **Bastion .50:** `M12A2_RoofMG50_Pivot` sits on the pintle axis (rotate about Z to traverse the gun). The post is fixed to the roof.
@@ -86,10 +88,9 @@ Revision 1 added the elevating-gear stops (proposals). Before that, nothing on t
 
 **Hatches open:**
 - No lid, door or hatch fouls any fixed part when open, and the turret lids clear the .50 mount, aerials and cupola.
-- Open hull hatches block turret traverse where the gun or turret passes over them (sampled every 15°, so the arcs are approximate):
-  - Kaisersturm driver's lid at about 30°, radio operator's at about 330°: the gun barrel.
-  - Bastion driver's lid at 45–60° and 210–270°; bow gunner's at 90–150° and 300–315°: the mantlet in front, the turret body and bustle behind.
-- That's a real crew-drill constraint (don't traverse with hull hatches open), not a modeling fault.
+- Open hull hatches and turret traverse (Revision 2 angles, sampled every 5° in the report and re-checked at 1°):
+  - **Bastion** (lids at 165°): the turret traverses a full 360° with both hull hatches open. At the old 95° the driver's lid blocked 45–60° and 210–270°, and the bow gunner's 90–150° and 300–315°.
+  - **Kaisersturm** (lids at 155°): with the gun level, the barrel still clips the driver's lid at about 32–40° and the radio operator's at about 320–328°. With the gun raised 2.5° the turret clears a full 360°. At the old 95° no elevation up to the stop cleared it. Crew drill: lay the gun at about +3° before traversing with hull hatches open.
 
 **Crew openings:** hull hatches 0.60 m on both. Cupola openings 0.60 m (Kaisersturm) and 0.56 m (Bastion). Loader's hatches 0.72 × 0.62 m and 0.65 × 0.55 m.
 
@@ -107,7 +108,7 @@ Made after Nate's review of the first Stage 2 checkpoint. All values are in the 
 **Bastion .50 moved forward** (Nate: it didn't look easy to operate from the hatch). The pintle went from the rear roof centre-line (turret x −0.85, y 0) to beside the commander's cupola (x +0.15, y −0.25). Before, the grips were about 1.4 m from either hatch. Now:
 - **Reach:** with the commander standing in the open cupola, shoulder to grips is **0.44 m**. The rule is shoulders 0.40 m above the hatch top and grips within 0.70 m. The loader's hatch is 0.92 m away, so this is the commander's gun.
 - **Clearances:** the gun still clears the cupola, both lids, the periscopes, the ventilator and the main gun through its full elevation.
-- **Traverse on the pintle:** the full 360° is clear with hatches closed. With hatches open it fouls the loader's lid at about 75° and the cupola lid at 225–255°.
+- **Traverse on the pintle:** the full 360° is clear with hatches closed and, since Revision 2, with all hatches open. In Revision 1 the cupola lid at 100° fouled it at about 75° and 225–255°. Those notes credited the 75° clash to the loader's lid, but the re-check showed it was the cupola lid.
 - **Height:** the grips sit 3.34 m above the ground. The mount is still removable and still excluded from the height envelope.
 
 **Smoke and gas grenade dischargers**, prompted by the setting's routine chemical warfare. Both are fired electrically from inside the turret.
@@ -128,12 +129,30 @@ Made after Nate's review of the first Stage 2 checkpoint. All values are in the 
 
 **Elevation stop.** An elevating-gear stop of +18° (Kaisersturm) and +20° (Bastion), recorded on each gun pivot. A full turret interior (basket, seats, ammunition) is still not modeled; for an exterior model the stop is the part that matters.
 
+## Revision 2 (15 Oct 2026)
+
+Nate allowed the hatches to open further, so that lids lying flatter would clear the turret, gun and .50. Each lid's angle was scanned in 5° steps from its old value to 180°, checking whether the lid fouls anything and what it still blocks. The change is only how far each lid opens; hinge lines, lids and every closed-pose measurement are unchanged.
+
+| Hatch | Was | Now | Why this angle |
+|---|---|---|---|
+| Kaisersturm driver, radio operator | 95° | 155° | Widest before the lid's periscope meets the hull roof (159–160°). The gun still clips the lid when level; +2.5° elevation clears it |
+| Bastion driver, bow gunner | 95° | 165° | First angle at which the turret traverses a full 360° with the lid open. Nothing fouled up to 180° |
+| Bastion cupola | 100° | 155° | First angle at which the .50 traverses a full 360° on its pintle with all lids open |
+| Kaisersturm cupola and loader, Bastion loader | 100° | 100° | No conflicts, so unchanged |
+
+What this solves: every Bastion open-hatch conflict (turret traverse and .50 traverse). For the Kaisersturm it shrinks the conflict to a small window over each hull hatch, cleared with 2.5° of gun elevation.
+
+What it doesn't solve: the Bastion's −3.5° depression at 45° traverse. That comes from the closed driver's-lid periscope, so opening angles can't change it.
+
+Side effect: open at 165°, the Bastion's hull lids reach 2.30 m from the centre-line, about 0.48 m past the track edge. They hang out over the tracks with the lid's top surface facing down. The Kaisersturm's lids at 155° stay over the hull roof. The opening angles are proposals; real hatches this wide would need a stop or catch, which isn't modeled.
+
 ## Review decisions (15 Oct 2026)
 
 - Nate liked most of the first checkpoint and flagged only the .50. Treated as approved: Kaisersturm bow MG and driver's visor; spare links and plate tow eyes; Bastion crew-air layout; hinge sides; vision-block counts, grille styles and tool layouts; and the three forced changes to Stage 1 geometry (trunnions, Bastion hull hatches, turret undercut).
 - Changed: Bastion .50 moved forward to the cupola (Revision 1).
 - Asked for before Stage 3: the "not modeled yet" items, with smoke **and gas** dischargers (Revision 1).
-- Not flagged, left as modeled pending confirmation: Kaisersturm −7.5° depression, Bastion −3.5° at 45°, Bastion 10.05 m core length, and no traversing with hull hatches open.
+- Not flagged, left as modeled pending confirmation: Kaisersturm −7.5° depression, Bastion −3.5° at 45°, Bastion 10.05 m core length.
+- Revision 1 follow-up: Nate confirmed gas grenade launchers are what he meant. He allowed hatches to open further where that clears parts (Revision 2).
 
 ## Stage 2 proposals (editable, not canon)
 
