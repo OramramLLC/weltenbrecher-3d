@@ -605,6 +605,8 @@ bs_coll, bs_root = build_bastion()
 exec(open(os.path.join(HERE, "stage2.py")).read())
 detail_kaisersturm(ks_coll, ks_root)
 detail_bastion(bs_coll, bs_root)
+exec(open(os.path.join(HERE, "stage3.py")).read())
+stage3_markings()
 ref = new_coll("Reference")
 bm = bmesh.new(); bm_box(bm, (-12, -9, -0.02), (12, 9, 0.0))
 ground = finish_mesh("Ground_Plane", bm, ref, MAT["ground"])
@@ -885,35 +887,46 @@ report["clearances"]["KS_B"]["discharger_launch_paths"] = discharger_paths("KS_B
 report["clearances"]["M12A2"]["discharger_launch_paths"] = discharger_paths("M12A2", bs_coll)
 report["clearances"]["M12A2"]["roof_mg50"] = roof_mg_checks("M12A2", bs_coll)
 
-# ------------------------------------------------------------------ save + export
+# ------------------------------------------------------------------ Stage 3 finish (bake), save + export
+report["finish"] = stage3_finish(OUT)
+report["markings"] = {tag: sorted(o.name for o in bpy.data.collections[tag].all_objects if o.get("marking"))
+                      for tag in ("KS_B", "M12A2")}
 for o in bpy.data.objects:
     if o.get("no_export"):
         o.hide_render = True
-bpy.ops.wm.save_as_mainfile(filepath=os.path.join(OUT, "weltenbrecher_stage2_detail.blend"))
+bpy.context.scene.render.engine = 'CYCLES'
+bpy.ops.wm.save_as_mainfile(filepath=os.path.join(OUT, "weltenbrecher_stage3_finish.blend"))
+bpy.ops.file.make_paths_relative()          # textures load from out/textures next to the .blend
+bpy.ops.wm.save_mainfile()
 
-def export_tree(root, path):
+def export_tree(root, path, images='AUTO'):
     bpy.ops.object.select_all(action='DESELECT')
     def sel(o):
-        if o.get("no_export"):
+        if o.get("no_export") or o.get("optional_decal"):
             return
         o.select_set(True)
         for c in o.children:
             sel(c)
     sel(root)
     bpy.context.view_layer.objects.active = root
-    bpy.ops.export_scene.gltf(filepath=path, export_format='GLB', use_selection=True,
+    bpy.ops.export_scene.gltf(filepath=path, export_format='GLB', use_selection=True, export_image_format=images,
                               export_apply=False, export_yup=True, export_extras=True)
 
-export_tree(ks_root, os.path.join(OUT, "KS_B_stage2.glb"))
-export_tree(bs_root, os.path.join(OUT, "M12A2_stage2.glb"))
+export_tree(ks_root, os.path.join(OUT, "KS_B_stage3.glb"))
+export_tree(bs_root, os.path.join(OUT, "M12A2_stage3.glb"))
 export_tree(fig, os.path.join(OUT, "scale_figure_1p80.glb"))
-# review pose: every hatch, lid and door open (neutral GLBs above stay closed)
+# the optional name decal ships as its own GLB in the same coordinate frame
+bpy.ops.object.select_all(action='DESELECT')
+dec = bpy.data.objects["M12A2_Decal_OkieGusher"]; dec.select_set(True); bpy.context.view_layer.objects.active = dec
+bpy.ops.export_scene.gltf(filepath=os.path.join(OUT, "M12A2_decal_okie_gusher.glb"), export_format='GLB', use_selection=True,
+                          export_apply=False, export_yup=True, export_extras=True)
+# review pose: every hatch, lid and door open (untextured; for clearance review only)
 all_h = [o for o in bpy.data.objects if o.type == 'EMPTY' and "open_deg" in o]
 for h in all_h: set_open(h)
 bpy.context.view_layer.update()
-export_tree(ks_root, os.path.join(OUT, "KS_B_stage2_hatches_open.glb"))
-export_tree(bs_root, os.path.join(OUT, "M12A2_stage2_hatches_open.glb"))
+export_tree(ks_root, os.path.join(OUT, "KS_B_stage3_hatches_open.glb"), images='NONE')
+export_tree(bs_root, os.path.join(OUT, "M12A2_stage3_hatches_open.glb"), images='NONE')
 for h in all_h:
     h.rotation_euler = (0, 0, h.get("yaw0", h.rotation_euler.z))
-json.dump(report, open(os.path.join(OUT, "stage2_report.json"), "w"), indent=2)
+json.dump(report, open(os.path.join(OUT, "stage3_report.json"), "w"), indent=2)
 print(json.dumps({k: v for k, v in report.items() if k != "clearances"}, indent=1)[:3000])

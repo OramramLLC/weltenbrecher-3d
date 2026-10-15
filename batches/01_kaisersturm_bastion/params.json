@@ -705,5 +705,179 @@
       "cupola_open_deg": 155,
       "_rev2_notes": "Rev. 2 (15 Oct 2026): hull hatch lids open to 165 deg (was 95) and the cupola lid to 155 deg (was 100), per Nate allowing wider opening. APPROVED by Nate 15 Oct 2026, including the open hull lids overhanging the tracks by about 0.48 m."
     }
+  },
+  "stage3": {
+    "_note": "Stage 3 finish. Every block tagged \"proposal\": true is Claude's choice awaiting Nate's review (brief: paint shades and weathering placements are art-direction proposals).",
+    "finish": {
+      "proposal": true,
+      "kaisersturm_b": {
+        "paint_srgb": "#5E6658",
+        "dust_amount": 0.35,
+        "mud_amount": 0.0,
+        "edge_wear": 0.5,
+        "access_scratches": 0.6,
+        "exhaust_soot": 0.55,
+        "_note": "muted gray-green; dust on horizontal surfaces; mud_amount reserved for a later Caucasus finish"
+      },
+      "bastion_m12a2": {
+        "paint_srgb": "#5A5838",
+        "dust_amount": 0.3,
+        "mud_amount": 0.0,
+        "edge_wear": 0.5,
+        "access_scratches": 0.5,
+        "rear_grime": 0.6,
+        "grease": 0.7,
+        "fender_abrasion": 0.7,
+        "replaced_panel": "EngineAccessPanel",
+        "replaced_panel_srgb": "#5E6140",
+        "_note": "olive; rear-engine grime, grease at service points, fender abrasion, dusty seals, one fresher replaced panel"
+      },
+      "dust_srgb": "#9A8C70",
+      "mud_srgb": "#5B4A36",
+      "bare_steel_srgb": "#5A5A58",
+      "soot_srgb": "#1A1918",
+      "grease_srgb": "#1E1B16",
+      "rubber_srgb": "#1C1C1C",
+      "track_steel_srgb": "#2E2D2B",
+      "track_polished_srgb": "#9A9690",
+      "glass_srgb": "#0A0D10",
+      "paint_roughness": 0.78,
+      "dust_roughness": 0.92
+    },
+    "surface": {
+      "proposal": true,
+      "weld_bead_width": 0.03,
+      "weld_strength": 0.5,
+      "welded": {
+        "kaisersturm_b": [
+          "Hull",
+          "Turret"
+        ],
+        "bastion_m12a2": [
+          "Hull"
+        ]
+      },
+      "cast": {
+        "kaisersturm_b": [
+          "Mantlet",
+          "Cupola"
+        ],
+        "bastion_m12a2": [
+          "Turret",
+          "Turret_Bustle",
+          "Mantlet",
+          "Cupola"
+        ]
+      },
+      "cast_bump_scale": 20.0,
+      "cast_bump_strength": 0.22,
+      "_note": "Weld beads and cast texture live in the normal map, so they never change a measured envelope. smooth_shaded parts get smooth shading with edges sharper than smooth_angle_deg kept crisp (shading only, no geometry change).",
+      "smooth_angle_deg": 35,
+      "smooth_shaded": {
+        "kaisersturm_b": [
+          "Barrel",
+          "RoadWheel",
+          "Idler",
+          "ReturnRoller",
+          "Cupola",
+          "Cupola_Lid",
+          "Discharger",
+          "Headlight",
+          "AerialBase",
+          "Aerial",
+          "TurretVentilator",
+          "FanCover",
+          "BowMG",
+          "CoaxMG",
+          "Exhausts",
+          "HatchRim",
+          "HatchLid"
+        ],
+        "bastion_m12a2": [
+          "Turret",
+          "Turret_Bustle",
+          "Mantlet",
+          "Barrel",
+          "RoadWheel",
+          "Idler",
+          "ReturnRoller",
+          "Cupola",
+          "Cupola_Lid",
+          "Discharger",
+          "Headlight",
+          "AerialBase",
+          "Aerial",
+          "TurretVentilator",
+          "BowMG",
+          "CoaxMG",
+          "RoofMG50_Mount",
+          "CrewAir_Intake",
+          "HatchRim",
+          "HatchLid"
+        ]
+      },
+      "weld_darken": 0.35
+    },
+    "markings": {
+      "proposal": true,
+      "kaisersturm_b": {
+        "cross_style": "pattee",
+        "_cross_style_options": "pattee (Iron Cross form, 1914-18) or balken (straight-armed, 1918)",
+        "turret_cross": {
+          "x": -0.7,
+          "z": 0.55,
+          "size": 0.36
+        },
+        "rear_cross": {
+          "z": 1.56,
+          "size": 0.27
+        },
+        "tactical_number": {
+          "text": "214",
+          "x": 0.45,
+          "z": 0.52,
+          "height": 0.2
+        }
+      },
+      "bastion_m12a2": {
+        "star": {
+          "x": -0.4,
+          "z": 1.58,
+          "size": 0.46
+        },
+        "bumper_codes": {
+          "left": "3A-7I",
+          "right": "B-12",
+          "height": 0.085,
+          "front_y": 0.95,
+          "front_z": 1.42,
+          "rear_y": 1.2,
+          "rear_z": 1.46
+        },
+        "optional_decal": {
+          "text": "Okie Gusher",
+          "x": 1.45,
+          "z": 1.62,
+          "height": 0.13,
+          "side": "L"
+        }
+      },
+      "proud_m": 0.0015
+    },
+    "bake": {
+      "basecolor_px": 4096,
+      "orm_px": 2048,
+      "normal_px": 4096,
+      "samples": 4,
+      "margin_px": 8
+    },
+    "beauty": {
+      "samples": 64,
+      "resolution": [
+        1600,
+        1000
+      ],
+      "_note": "cloud preview settings; raise samples locally for final beauty renders"
+    }
   }
 }

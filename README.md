@@ -14,7 +14,7 @@ Every vehicle goes through three stages, and each stage ends at a review gate. N
 | 2. Functional detail | Hatches with opening envelopes, vision devices, grilles, tow gear, weapons, crew access | Could a crew actually operate this thing? |
 | 3. Finish | Surface treatment, weld and cast texture, markings, beauty renders | Is it ready to show someone? |
 
-Stage 3 beauty renders are done in Blender on Nate's own machine. The cloud workspace can't render geometry in Blender, so review sheets there come from a separate renderer that works from the exported `.glb` files.
+Beauty renders come from `beauty.py`, which renders the finished `.blend` with Blender's Cycles renderer. Cycles runs on the CPU in the cloud workspace, so preview renders are made there. Final high-sample renders can be made on Nate's own machine with the same script. The measured gray review sheets come from a separate OpenGL renderer that works from the exported `.glb` files, which doubles as an export check.
 
 ## Repository layout
 
@@ -26,12 +26,15 @@ weltenbrecher-3d/
 │   └── scale_figure_1p80.glb   # 1.80 m human, included in every review sheet
 ├── batches/
 │   ├── 01_kaisersturm_bastion/ # Kaisersturm Ausf. B and M12A2 Bastion
-│   │   ├── generate.py         # builds the models from params.json
-│   │   ├── render.py           # builds the review sheets
+│   │   ├── generate.py         # builds the models from params.json (runs stage2.py, stage3.py)
+│   │   ├── stage2.py           # functional detail
+│   │   ├── stage3.py           # markings, finish and texture bake
+│   │   ├── render.py           # builds the gray review sheets from the GLBs
+│   │   ├── beauty.py           # Cycles beauty renders from the finished .blend
 │   │   ├── params.json         # every dimension; proposals tagged as such
 │   │   ├── STAGE1_NOTES.md     # decisions, changes, open questions per stage
-│   │   ├── out/                # .blend, .glb, stage report (generated)
-│   │   └── renders/            # review sheets (generated)
+│   │   ├── out/                # .blend, .glb, textures/, stage report (generated)
+│   │   └── renders/            # review sheets and beauty renders (generated)
 │   ├── 02_mammut/              # LK700 Mammut
 │   └── 03_weltenbrecher/       # Weltenbrecher railway gun
 └── checkpoints/            # zipped snapshots delivered at each review gate
@@ -61,8 +64,8 @@ Controlling canon is the *Weltenbrecher World and Story Bible v6.0*. Items marke
 ## Getting started in a cloud session
 
 1. Unpack the latest checkpoint zip into `batches/01_kaisersturm_bastion/`, with outputs into `out/` and sheets into `renders/`.
-2. Install dependencies: Blender (headless) for `generate.py`, and whatever `render.py` imports.
-3. Run `generate.py` and then `render.py`. Confirm the stage report passes before changing anything.
+2. Install dependencies: `pip install bpy numpy scipy trimesh pyrender pillow` (bpy is headless Blender, including Cycles). `render.py` also needs the system EGL/Mesa libraries (`libegl1 libegl-mesa0 libgl1-mesa-dri`) and DejaVu fonts.
+3. Run `generate.py`, then `render.py`, then `beauty.py`. Confirm the stage report passes before changing anything. From Stage 3 on, `generate.py` bakes the finish textures, which takes about 30–40 minutes on a 4-core cloud machine.
 4. Commit generated outputs only at review gates, alongside the checkpoint zip.
 
 ## Git notes

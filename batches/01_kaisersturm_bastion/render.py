@@ -11,7 +11,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out"); REN = os.path.join(HERE, "renders")
 os.makedirs(REN, exist_ok=True)
-REP = json.load(open(os.path.join(OUT, "stage2_report.json")))
+REP = json.load(open(os.path.join(OUT, "stage3_report.json")))
 PRM = json.load(open(os.path.join(HERE, "params.json")))
 PPM = 80          # output pixels per metre, all orthographic views
 SS = 2            # supersampling
@@ -22,7 +22,23 @@ def font(sz, bold=False): return ImageFont.truetype(FONTB if bold else FONT, sz)
 # glTF is Y-up; convert back to the project's Z-up (+X fwd, +Y left)
 YUP_TO_ZUP = np.array([[1, 0, 0, 0], [0, 0, -1, 0], [0, 1, 0, 0], [0, 0, 0, 1]], float)
 
-def load_glb(path, offset=(0, 0, 0)):
+# Review sheets stay in flat gray (brief: the comparison must work in gray). The finished GLBs carry baked
+# textures, so each material is mapped back to its blockout gray by name and markings are left out.
+GRAY = {"armor": (0.42, 0.42, 0.42, 1.0, 0.85), "detail": (0.30, 0.30, 0.30, 1.0, 0.85), "running": (0.20, 0.20, 0.20, 1.0, 0.85),
+        "track": (0.20, 0.20, 0.20, 1.0, 0.85), "vision": (0.04, 0.05, 0.06, 1.0, 0.3), "recess": (0.12, 0.12, 0.12, 1.0, 0.85)}
+
+def gray_visual(g):
+    name = getattr(getattr(g.visual, "material", None), "name", "") or ""
+    cat = name.rsplit("_", 1)[-1]
+    if cat not in GRAY:
+        return None if name.startswith("Marking") else g
+    *rgba, rough = GRAY[cat]
+    g = g.copy()
+    g.visual = trimesh.visual.TextureVisuals(material=trimesh.visual.material.PBRMaterial(
+        name=name, baseColorFactor=rgba, metallicFactor=0.0, roughnessFactor=rough))
+    return g
+
+def load_glb(path, offset=(0, 0, 0), gray=True):
     sc = trimesh.load(path, force="scene")
     items = []
     names = []
@@ -30,6 +46,10 @@ def load_glb(path, offset=(0, 0, 0)):
     for node in sc.graph.nodes_geometry:
         M, gname = sc.graph[node]
         g = sc.geometry[gname]
+        if gray:
+            g = gray_visual(g)
+            if g is None:
+                continue
         items.append((g, T0 @ YUP_TO_ZUP @ M))
         names.append(node)
     return items, names
@@ -87,8 +107,8 @@ def with_edges(col, dep, depth_jump=0.06):
     return img.resize((img.width // SS, img.height // SS), Image.LANCZOS), mask
 
 TANKS = {
-    "KS_B": dict(glb="KS_B_stage2.glb", glb_open="KS_B_stage2_hatches_open.glb", label="KAISERSTURM AUSF. B", key="kaisersturm_b"),
-    "M12A2": dict(glb="M12A2_stage2.glb", glb_open="M12A2_stage2_hatches_open.glb", label="M12A2 BASTION", key="bastion_m12a2"),
+    "KS_B": dict(glb="KS_B_stage3.glb", glb_open="KS_B_stage3_hatches_open.glb", label="KAISERSTURM AUSF. B", key="kaisersturm_b"),
+    "M12A2": dict(glb="M12A2_stage3.glb", glb_open="M12A2_stage3_hatches_open.glb", label="M12A2 BASTION", key="bastion_m12a2"),
 }
 FIG = os.path.join(OUT, "scale_figure_1p80.glb")
 
@@ -100,14 +120,16 @@ TOP = dict(x0=-6.2, x1=7.2, y0=-3.5, y1=3.5)
 views = {}
 counts = {}
 for tag, t in TANKS.items():
-    items, names = load_glb(os.path.join(OUT, t["glb"]))
+    full, names = load_glb(os.path.join(OUT, t["glb"]), gray=False)
+    items, _ = load_glb(os.path.join(OUT, t["glb"]))
     counts[tag] = dict(mesh_nodes=len(names), track_links=sum("TrackLink" in n for n in names),
-                       road_wheels=sum("RoadWheel" in n for n in names))
+                       road_wheels=sum("RoadWheel" in n for n in names), marking_meshes=sum("Marking" in n for n in names),
+                       textured_meshes=sum(getattr(getattr(g.visual, "material", None), "baseColorTexture", None) is not None for g, M in full))
     # verify exported bounds against the Blender report
-    allv = np.vstack([trimesh.transform_points(g.vertices, M) for g, M in items])
+    allv = np.vstack([trimesh.transform_points(g.vertices, M) for g, M in full])
     counts[tag]["glb_bounds_min"] = allv.min(0).round(3).tolist()
     counts[tag]["glb_bounds_max"] = allv.max(0).round(3).tolist()
-    counts[tag]["glb_triangles"] = int(sum(len(g.faces) for g, M in items))
+    counts[tag]["glb_triangles"] = int(sum(len(g.faces) for g, M in full))
     rep = REP[tag]
     figx = rep["hull_rear_x"] - 1.0
     figy = -(rep["overall_width"] / 2 + 0.9)
