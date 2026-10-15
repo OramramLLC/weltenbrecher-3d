@@ -144,7 +144,7 @@ What this solves: every Bastion open-hatch conflict (turret traverse and .50 tra
 
 What it doesn't solve: the Bastion's −3.5° depression at 45° traverse. That comes from the closed driver's-lid periscope, so opening angles can't change it.
 
-Side effect: open at 165°, the Bastion's hull lids reach 2.30 m from the centre-line, about 0.48 m past the track edge. They hang out over the tracks with the lid's top surface facing down. The Kaisersturm's lids at 155° stay over the hull roof. The opening angles are proposals; real hatches this wide would need a stop or catch, which isn't modeled.
+Side effect: open at 165°, the Bastion's hull lids reach 2.30 m from the centre-line, about 0.48 m past the track edge. They hang out over the tracks with the lid's top surface facing down. The Kaisersturm's lids at 155° stay over the hull roof. Nate approved the opening angles, the overhang and the +3° drill on 15 Oct 2026. Real hatches this wide would need a stop or catch, which isn't modeled.
 
 ## Review decisions (15 Oct 2026)
 
@@ -153,6 +153,7 @@ Side effect: open at 165°, the Bastion's hull lids reach 2.30 m from the centre
 - Asked for before Stage 3: the "not modeled yet" items, with smoke **and gas** dischargers (Revision 1).
 - Not flagged, left as modeled pending confirmation: Kaisersturm −7.5° depression, Bastion −3.5° at 45°, Bastion 10.05 m core length.
 - Revision 1 follow-up: Nate confirmed gas grenade launchers are what he meant. He allowed hatches to open further where that clears parts (Revision 2).
+- Approved (Revision 2): hull hatch lids opening to 155° (Kaisersturm) and 165° (Bastion), and the Bastion cupola lid to 155°. The Bastion's open hull lids overhanging the tracks by about 0.48 m is accepted. Kaisersturm crew drill: lay the gun at about +3° before traversing with hull hatches open.
 
 ## Stage 2 proposals (editable, not canon)
 
